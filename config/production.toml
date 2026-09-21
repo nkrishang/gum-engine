@@ -3,7 +3,10 @@
 #                                      the leader lease is a session-level advisory lock)
 #   GUM_WEBHOOK__SIGNING_SECRET        HMAC secret for webhook signatures
 #   GUM_SIGNERS__KMS_KEY_IDS           JSON array of KMS key ids/ARNs, e.g. '["1234abcd-…","…"]' (never aliases)
-#   GUM_RPC_MONAD / _BASE / _ARBITRUM  QuickNode endpoint URLs
+#   RPC_URL_MONAD / RPC_URL_BASE / RPC_URL_ARBITRUM   QuickNode endpoint URLs. Deliberately NOT prefixed with
+#                                      GUM_: every GUM_* variable is parsed as a config override, and an
+#                                      unknown one is a boot error.
+#   GUM_CHAINS__<NAME>__TREASURY_KEY_ID  KMS key id of each chain's treasury
 #   AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY / AWS_REGION   IAM user limited to kms:Sign + kms:GetPublicKey
 # Seal all of them in Railway.
 
@@ -27,7 +30,7 @@ kms_key_ids = []               # set by GUM_SIGNERS__KMS_KEY_IDS; add ids + rede
 [chains.monad]
 chain_id = 143
 kind = "monad"
-rpc_url_env = "GUM_RPC_MONAD"
+rpc_url_env = "RPC_URL_MONAD"
 treasury_key_id = "replace-with-kms-key-id"
 # Monad enforces a 10 MON reserve per account; the engine already treats it as unspendable, so these
 # amounts are what a signer can actually use on top of it.
@@ -38,7 +41,7 @@ treasury_min_balance = "500000000000000000000"    # 500 MON
 [chains.base]
 chain_id = 8453
 kind = "opstack"
-rpc_url_env = "GUM_RPC_BASE"
+rpc_url_env = "RPC_URL_BASE"
 treasury_key_id = "replace-with-kms-key-id"
 signer_min_balance = "2000000000000000"           # 0.002 ETH
 topup_amount = "10000000000000000"                # 0.01 ETH
@@ -47,7 +50,7 @@ treasury_min_balance = "200000000000000000"       # 0.2 ETH
 [chains.arbitrum]
 chain_id = 42161
 kind = "arbitrum"
-rpc_url_env = "GUM_RPC_ARBITRUM"
+rpc_url_env = "RPC_URL_ARBITRUM"
 treasury_key_id = "replace-with-kms-key-id"
 signer_min_balance = "2000000000000000"           # 0.002 ETH
 topup_amount = "10000000000000000"                # 0.01 ETH

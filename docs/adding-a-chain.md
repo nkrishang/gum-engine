@@ -20,7 +20,7 @@ Add a block to the config and an env var for the endpoint. No code, no rebuild o
 [chains.optimism]
 chain_id = 10
 kind = "opstack"
-rpc_url_env = "GUM_RPC_OPTIMISM"
+rpc_url_env = "RPC_URL_OPTIMISM"
 treasury_key_id = "<kms key id>"
 signer_min_balance = "2000000000000000"
 topup_amount = "10000000000000000"

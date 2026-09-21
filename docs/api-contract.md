@@ -160,7 +160,7 @@ kms_key_ids = []               # mode = kms
 [chains.anvil]                 # table name = display name
 chain_id = 31337
 kind = "geth"                  # geth | opstack | arbitrum | monad
-rpc_url = "http://127.0.0.1:8545"      # or rpc_url_env = "GUM_RPC_ANVIL"
+rpc_url = "http://127.0.0.1:8545"      # or rpc_url_env = "RPC_URL_ANVIL"
 treasury_private_key = "0x…"           # local mode; kms mode: treasury_key_id = "…"
 signer_min_balance = "1000000000000000000"
 topup_amount = "5000000000000000000"

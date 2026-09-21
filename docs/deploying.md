@@ -17,10 +17,12 @@ gum-engine deploys to [Railway](https://railway.com) as a single service next to
    | `DATABASE_URL` | Railway Postgres, private network URL |
    | `GUM_WEBHOOK__SIGNING_SECRET` | HMAC secret for webhook signatures |
    | `GUM_SIGNERS__KMS_KEY_IDS` | JSON array of KMS key ids or ARNs, e.g. `["1234abcd-…","…"]` |
-   | `GUM_RPC_MONAD`, `GUM_RPC_BASE`, `GUM_RPC_ARBITRUM` | QuickNode endpoint URLs |
+   | `GUM_CHAINS__MONAD__TREASURY_KEY_ID`, `…__BASE__…`, `…__ARBITRUM__…` | KMS key id of each chain's treasury (one key may serve all chains) |
+   | `RPC_URL_MONAD`, `RPC_URL_BASE`, `RPC_URL_ARBITRUM` | QuickNode endpoint URLs |
    | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION` | IAM user for KMS |
 
-   Set each chain's `treasury_key_id` in `config/production.toml`.
+   Every `GUM_*` variable is parsed as a config override (`__` separates nesting), and an unknown one is
+   a boot error. That is why the RPC URL variables are deliberately not prefixed with `GUM_`.
 4. **AWS KMS.** Keys are `ECC_SECG_P256K1`, usage sign/verify. The IAM user needs only `kms:Sign` and
    `kms:GetPublicKey` on the signer and treasury key ARNs. Reference keys by id or ARN, never by alias.
    Railway has no OIDC or role assumption, so credentials are IAM user keys.
