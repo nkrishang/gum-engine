@@ -26,7 +26,7 @@ killed, run database dropped).
   --state <file> --silent` — no latency flags, ever.
 * A Postgres server on which the current user may `CREATE DATABASE`. Default
   `postgres://localhost:5432/postgres`; override with `--postgres-url` / `GUM_BENCH_POSTGRES_URL`, e.g.
-  the compose instance: `postgres://gum:gum@127.0.0.1:54329/gum`. Every run gets a fresh
+  the compose instance: `postgres://gum_engine:gum_engine@127.0.0.1:54330/gum_engine`. Every run gets a fresh
   `gum_bench_<id>` database, dropped afterwards unless `--keep-db`.
 * No `forge` needed: the `BenchTarget` creation bytecode is committed (`contracts/BenchTarget.hex`).
 

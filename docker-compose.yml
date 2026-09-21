@@ -1,16 +1,18 @@
-# Local dev + bench dependencies. Ports are offset so they never collide with a host Postgres/Anvil.
+# Local dev + bench dependencies. Postgres uses its own port, user and database name so it can never be
+# mistaken for another project's database: with `auto_migrate` on, the engine creates its schema in whatever
+# database it is pointed at.
 services:
   postgres:
     image: postgres:17
     environment:
-      POSTGRES_USER: gum
-      POSTGRES_PASSWORD: gum
-      POSTGRES_DB: gum
+      POSTGRES_USER: gum_engine
+      POSTGRES_PASSWORD: gum_engine
+      POSTGRES_DB: gum_engine
     ports:
-      - "54329:5432"
+      - "54330:5432"
     command: ["postgres", "-c", "max_connections=200"]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U gum"]
+      test: ["CMD-SHELL", "pg_isready -U gum_engine"]
       interval: 1s
       timeout: 3s
       retries: 30

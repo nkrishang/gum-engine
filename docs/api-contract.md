@@ -142,7 +142,7 @@ Error body: `{"error":{"code":"<code>","message":"<human text>"}}`.
 port = 8080
 
 [database]
-url = "postgres://gum:gum@127.0.0.1:54329/gum"
+url = "postgres://gum_engine:gum_engine@127.0.0.1:54330/gum_engine"
 auto_migrate = true            # run embedded migrations at boot
 
 [webhook]
