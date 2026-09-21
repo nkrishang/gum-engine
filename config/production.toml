@@ -1,0 +1,54 @@
+# Production configuration. Secrets never live in this file:
+#   DATABASE_URL                       Railway Postgres (private network URL; never via PgBouncer —
+#                                      the leader lease is a session-level advisory lock)
+#   GUM_WEBHOOK__SIGNING_SECRET        HMAC secret for webhook signatures
+#   GUM_SIGNERS__KMS_KEY_IDS           JSON array of KMS key ids/ARNs, e.g. '["1234abcd-…","…"]' (never aliases)
+#   GUM_RPC_MONAD / _BASE / _ARBITRUM  QuickNode endpoint URLs
+#   AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY / AWS_REGION   IAM user limited to kms:Sign + kms:GetPublicKey
+# Seal all of them in Railway.
+
+[database]
+url = "set-by-DATABASE_URL"
+auto_migrate = false           # migrations run in Railway's preDeployCommand
+
+[webhook]
+signing_secret = "set-by-GUM_WEBHOOK__SIGNING_SECRET"
+
+[rpc]
+# QuickNode Build plan: 50 RPS account-wide. Stay under it; the limiter backs off further on 429s.
+account_rps = 45
+monthly_credit_budget = 80000000
+# daily_credit_cap = 4000000   # optional hard stop: refuse NEW jobs (503 `shedding`) beyond this per UTC day
+
+[signers]
+mode = "kms"
+kms_key_ids = []               # set by GUM_SIGNERS__KMS_KEY_IDS; add ids + redeploy to scale the pool
+
+[chains.monad]
+chain_id = 143
+kind = "monad"
+rpc_url_env = "GUM_RPC_MONAD"
+treasury_key_id = "replace-with-kms-key-id"
+# Monad enforces a 10 MON reserve per account; the engine already treats it as unspendable, so these
+# amounts are what a signer can actually use on top of it.
+signer_min_balance = "5000000000000000000"        # 5 MON spendable
+topup_amount = "25000000000000000000"             # 25 MON
+treasury_min_balance = "500000000000000000000"    # 500 MON
+
+[chains.base]
+chain_id = 8453
+kind = "opstack"
+rpc_url_env = "GUM_RPC_BASE"
+treasury_key_id = "replace-with-kms-key-id"
+signer_min_balance = "2000000000000000"           # 0.002 ETH
+topup_amount = "10000000000000000"                # 0.01 ETH
+treasury_min_balance = "200000000000000000"       # 0.2 ETH
+
+[chains.arbitrum]
+chain_id = 42161
+kind = "arbitrum"
+rpc_url_env = "GUM_RPC_ARBITRUM"
+treasury_key_id = "replace-with-kms-key-id"
+signer_min_balance = "2000000000000000"           # 0.002 ETH
+topup_amount = "10000000000000000"                # 0.01 ETH
+treasury_min_balance = "200000000000000000"       # 0.2 ETH

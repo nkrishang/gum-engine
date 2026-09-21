@@ -1,0 +1,19 @@
+[
+  {
+    "note": "L1 cost is inside gasUsed; nothing is charged on top",
+    "gas_limit": 400000,
+    "max_fee_per_gas": "60000000",
+    "value": "5",
+    "receipt": {
+      "transactionHash": "0x7700000000000000000000000000000000000000000000000000000000000000",
+      "blockNumber": "0x1a2b3c4d",
+      "blockHash": "0x8800000000000000000000000000000000000000000000000000000000000000",
+      "status": "0x1",
+      "gasUsed": "0x2f4d6",
+      "effectiveGasPrice": "0x1312d00",
+      "gasUsedForL1": "0x1d4c0",
+      "l1BlockNumber": "0x15ee000"
+    },
+    "expect_fee_paid": "3875000000000"
+  }
+]

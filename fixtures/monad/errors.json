@@ -1,0 +1,63 @@
+[
+  {
+    "code": -32603,
+    "message": "Transaction nonce too low",
+    "class": "NonceTooLow"
+  },
+  {
+    "code": -32603,
+    "message": "Transaction fee too low",
+    "class": "FeeTooLow"
+  },
+  {
+    "code": -32603,
+    "message": "Signer had insufficient balance",
+    "class": "InsufficientFunds"
+  },
+  {
+    "code": -32603,
+    "message": "An existing transaction had higher priority",
+    "class": "AlreadyKnown"
+  },
+  {
+    "code": -32603,
+    "message": "A newer transaction had higher priority",
+    "class": "Indeterminate",
+    "note": "our own replacement displaced it; the nonce is still ours and live"
+  },
+  {
+    "code": -32603,
+    "message": "Transaction pool is full",
+    "class": "PoolBusy"
+  },
+  {
+    "code": -32603,
+    "message": "Transaction pool is not ready",
+    "class": "PoolBusy"
+  },
+  {
+    "code": -32603,
+    "message": "Gas limit too low",
+    "class": "Deterministic"
+  },
+  {
+    "code": -32603,
+    "message": "Exceeds transaction gas limit",
+    "class": "Deterministic"
+  },
+  {
+    "code": -32603,
+    "message": "Unsupported transaction type",
+    "class": "Deterministic"
+  },
+  {
+    "code": -32603,
+    "message": "Transaction expired",
+    "class": "Indeterminate"
+  },
+  {
+    "code": -32603,
+    "message": "rpc no longer tracking tx",
+    "class": "Indeterminate"
+  }
+]

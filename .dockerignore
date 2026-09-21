@@ -1,0 +1,5 @@
+target
+.git
+bench/results
+*.log
+.env

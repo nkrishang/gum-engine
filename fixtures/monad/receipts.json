@@ -1,0 +1,17 @@
+[
+  {
+    "note": "charged on the gas LIMIT, not on gasUsed",
+    "gas_limit": 100000,
+    "max_fee_per_gas": "152000000000",
+    "value": "0",
+    "receipt": {
+      "transactionHash": "0x9900000000000000000000000000000000000000000000000000000000000000",
+      "blockNumber": "0x3c00000",
+      "blockHash": "0xaa00000000000000000000000000000000000000000000000000000000000000",
+      "status": "0x1",
+      "gasUsed": "0x5208",
+      "effectiveGasPrice": "0x17bfac7c00"
+    },
+    "expect_fee_paid": "10200000000000000"
+  }
+]

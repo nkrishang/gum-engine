@@ -1,0 +1,63 @@
+[package]
+name = "gum-engine"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[lib]
+name = "gum_engine"
+path = "src/lib.rs"
+
+[[bin]]
+name = "gum-engine"
+path = "src/main.rs"
+
+[dependencies]
+alloy = { workspace = true, features = [
+    "std",
+    "reqwest",
+    "reqwest-rustls-tls",
+    "consensus",
+    "eips",
+    "network",
+    "rlp",
+    "providers",
+    "provider-http",
+    "rpc-types-eth",
+    "signers",
+    "signer-aws",
+    "signer-local",
+    "sol-types",
+    "json-abi",
+] }
+anyhow.workspace = true
+async-trait = "0.1"
+aws-config = { version = "1", default-features = false, features = ["behavior-version-latest", "rt-tokio", "rustls", "credentials-process"] }
+aws-sdk-kms = { version = "1", default-features = false, features = ["behavior-version-latest", "rt-tokio", "rustls"] }
+axum.workspace = true
+chrono.workspace = true
+figment = { version = "0.10", features = ["toml", "env"] }
+futures.workspace = true
+hex.workspace = true
+hmac.workspace = true
+metrics = "0.24"
+metrics-exporter-prometheus = { version = "0.18", default-features = false }
+parking_lot.workspace = true
+rand.workspace = true
+reqwest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+sqlx = { version = "0.9", default-features = false, features = ["runtime-tokio", "tls-rustls", "postgres", "migrate", "macros", "uuid", "chrono", "json"] }
+thiserror.workspace = true
+tokio.workspace = true
+tokio-util.workspace = true
+tower-http = { version = "0.7", features = ["limit", "catch-panic", "timeout"] }
+tracing.workspace = true
+tracing-subscriber.workspace = true
+url.workspace = true
+uuid.workspace = true
+
+[dev-dependencies]
+alloy = { workspace = true, features = ["node-bindings", "provider-anvil-api"] }
+tokio = { workspace = true, features = ["test-util"] }

@@ -1,0 +1,88 @@
+[
+  {
+    "code": -32000,
+    "message": "already known",
+    "class": "AlreadyKnown"
+  },
+  {
+    "code": -32000,
+    "message": "nonce too low: next nonce 12, tx nonce 11",
+    "class": "NonceTooLow"
+  },
+  {
+    "code": -32000,
+    "message": "nonce too high",
+    "class": "NonceTooHigh"
+  },
+  {
+    "code": -32000,
+    "message": "replacement transaction underpriced",
+    "class": "FeeTooLow"
+  },
+  {
+    "code": -32000,
+    "message": "transaction underpriced: gas tip cap 1, minimum needed 1000000",
+    "class": "FeeTooLow"
+  },
+  {
+    "code": -32000,
+    "message": "max fee per gas less than block base fee: address 0xabc, maxFeePerGas: 1 baseFee: 7",
+    "class": "FeeTooLow"
+  },
+  {
+    "code": -32000,
+    "message": "insufficient funds for gas * price + value: balance 0, tx cost 21000000000000",
+    "class": "InsufficientFunds"
+  },
+  {
+    "code": -32000,
+    "message": "Insufficient funds for gas * price + value",
+    "class": "InsufficientFunds"
+  },
+  {
+    "code": -32000,
+    "message": "intrinsic gas too low: gas 20000, minimum needed 21000",
+    "class": "Deterministic"
+  },
+  {
+    "code": -32000,
+    "message": "exceeds block gas limit",
+    "class": "Deterministic"
+  },
+  {
+    "code": -32000,
+    "message": "oversized data: transaction size 140000, limit 131072",
+    "class": "Deterministic"
+  },
+  {
+    "code": -32000,
+    "message": "max priority fee per gas higher than max fee per gas",
+    "class": "Deterministic"
+  },
+  {
+    "code": -32000,
+    "message": "txpool is full",
+    "class": "PoolBusy"
+  },
+  {
+    "code": -32000,
+    "message": "account limit exceeded",
+    "class": "PoolBusy"
+  },
+  {
+    "code": 4,
+    "message": "The transaction was added to the mempool but wasn't processed within 2000ms",
+    "data": "0x8b5c1d4e7a",
+    "class": "AcceptedPending"
+  },
+  {
+    "code": -32603,
+    "message": "Internal error",
+    "class": "Indeterminate"
+  },
+  {
+    "code": -32000,
+    "message": "some brand new message nobody has seen before",
+    "class": "Indeterminate"
+  }
+]

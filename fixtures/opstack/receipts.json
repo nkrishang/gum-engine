@@ -1,0 +1,44 @@
+[
+  {
+    "note": "Base: L1 data fee is charged on top of gas_used * price",
+    "gas_limit": 60000,
+    "max_fee_per_gas": "50000000",
+    "value": "0",
+    "receipt": {
+      "transactionHash": "0x3300000000000000000000000000000000000000000000000000000000000000",
+      "blockNumber": "0x2d97a0e",
+      "blockHash": "0x4400000000000000000000000000000000000000000000000000000000000000",
+      "status": "0x1",
+      "gasUsed": "0xb0c4",
+      "effectiveGasPrice": "0x4c4b40",
+      "l1Fee": "0x2540be400",
+      "l1GasUsed": "0x640",
+      "l1GasPrice": "0x3b9aca00",
+      "l1BlobBaseFee": "0x1",
+      "l1BaseFeeScalar": "0x8dd",
+      "l1BlobBaseFeeScalar": "0x101c12"
+    },
+    "expect_fee_paid": "236260000000",
+    "expect_l1_fee": "10000000000",
+    "l1_fee_per_byte": "60000000"
+  },
+  {
+    "note": "operator fee present (Isthmus)",
+    "gas_limit": 60000,
+    "max_fee_per_gas": "50000000",
+    "value": "0",
+    "receipt": {
+      "transactionHash": "0x5500000000000000000000000000000000000000000000000000000000000000",
+      "blockNumber": "0x2d97a0f",
+      "blockHash": "0x6600000000000000000000000000000000000000000000000000000000000000",
+      "status": "0x1",
+      "gasUsed": "0x5208",
+      "effectiveGasPrice": "0x4c4b40",
+      "l1Fee": "0x3e8",
+      "operatorFee": "0x64"
+    },
+    "expect_fee_paid": "105000001100",
+    "expect_l1_fee": "1000",
+    "l1_fee_per_byte": "60000000"
+  }
+]

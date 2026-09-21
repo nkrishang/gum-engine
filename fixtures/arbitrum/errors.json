@@ -1,0 +1,43 @@
+[
+  {
+    "code": -32000,
+    "message": "nonce too low: address 0xabc, tx: 4 state: 5",
+    "class": "NonceTooLow"
+  },
+  {
+    "code": -32000,
+    "message": "nonce too high: address 0xabc, tx: 9 state: 5",
+    "class": "NonceTooHigh"
+  },
+  {
+    "code": -32000,
+    "message": "max fee per gas less than block base fee: address 0xabc, maxFeePerGas: 10000000 baseFee: 20000000",
+    "class": "FeeTooLow"
+  },
+  {
+    "code": -32000,
+    "message": "insufficient funds for gas * price + value: address 0xabc have 0 want 100",
+    "class": "InsufficientFunds"
+  },
+  {
+    "code": -32000,
+    "message": "intrinsic gas too low",
+    "class": "Deterministic"
+  },
+  {
+    "code": -32000,
+    "message": "already known",
+    "class": "AlreadyKnown"
+  },
+  {
+    "code": -32000,
+    "message": "replacement transaction underpriced",
+    "class": "Indeterminate",
+    "note": "no pool on Nitro; if this ever appears it is not understood, so it must not be acted on"
+  },
+  {
+    "code": -32603,
+    "message": "context deadline exceeded",
+    "class": "Indeterminate"
+  }
+]

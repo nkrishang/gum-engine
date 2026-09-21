@@ -1,0 +1,4968 @@
+{
+  "schema_version": 1,
+  "scenario": "steady",
+  "params": {
+    "account_rps": 500,
+    "block_time_s": 1,
+    "burn_iterations": 200,
+    "chains": 1,
+    "duration_s": 150.0,
+    "extra": {},
+    "flaky_p": 0.5,
+    "idem_fraction": 0.5,
+    "initial_signer_balance_eth": null,
+    "mix": {
+      "burn_gas": 5,
+      "fail_gas": 8,
+      "fail_nogas": 7,
+      "hit_gas": 40,
+      "hit_nogas": 30,
+      "transfer": 10
+    },
+    "rate": 8.0,
+    "replay_fraction": 0.2,
+    "retry_with_idem": false,
+    "rpc_rtt_ms": 0,
+    "seed": 42,
+    "signer_min_balance_eth": 1.0,
+    "signers": 10,
+    "slow_ms": 2000,
+    "topup_amount_eth": 5.0,
+    "treasury_min_balance_eth": 100.0,
+    "webhook_modes": [
+      [
+        "ok",
+        1
+      ]
+    ]
+  },
+  "started_at": "2026-09-21T06:26:04.061863+00:00",
+  "finished_at": "2026-09-21T06:28:36.791717+00:00",
+  "duration_s": 151.361,
+  "git": {
+    "sha": "nogit",
+    "dirty": true
+  },
+  "machine": {
+    "os": "Darwin",
+    "os_version": "14.8.4",
+    "arch": "aarch64",
+    "cpu_model": "Apple M1 Pro",
+    "cores": 10,
+    "ram_bytes": 17179869184,
+    "fingerprint": "Darwin/aarch64/Apple M1 Pro/10c/16GiB"
+  },
+  "engine": {
+    "mode": "binary",
+    "label": "/Users/krishang/Desktop/projects/gum-engine/target/release/gum-engine",
+    "build_profile": "release",
+    "restarts": 0
+  },
+  "load": {
+    "offered_jobs": 1200,
+    "load_duration_s": 150.002,
+    "offered_rate": 8.0,
+    "accepted_jobs": 1200,
+    "achieved_accept_rate": 8.0,
+    "segments": [
+      {
+        "start_s": 0.000236042,
+        "rate": 8.0,
+        "duration_s": 150.002197333,
+        "scheduled": 1200
+      }
+    ],
+    "schedule_lag_ms": {
+      "count": 1200,
+      "min": 0.86,
+      "mean": 2.297,
+      "p50": 2.291,
+      "p90": 2.823,
+      "p95": 2.957,
+      "p99": 4.759,
+      "p999": 12.471,
+      "max": 22.015
+    }
+  },
+  "throughput": {
+    "confirmed_jobs": 1122,
+    "confirmed_per_s": 7.441,
+    "window_s": 150.791,
+    "basis": "api_confirmed_at",
+    "finished_per_s_in_load_window": 7.993,
+    "on_chain_per_s_in_load_window": 7.473,
+    "on_chain_per_s_in_load_window_by_chain": {
+      "31337": 7.473
+    }
+  },
+  "latency_ms": {
+    "accept": {
+      "count": 1200,
+      "min": 1.966,
+      "mean": 5.343,
+      "p50": 4.807,
+      "p90": 7.819,
+      "p95": 9.415,
+      "p99": 14.343,
+      "p999": 32.895,
+      "max": 40.543
+    },
+    "accept_to_included": {
+      "count": 1122,
+      "min": 29.792,
+      "mean": 491.944,
+      "p50": 469.503,
+      "p90": 915.967,
+      "p95": 931.839,
+      "p99": 947.199,
+      "p999": 1000.959,
+      "max": 1004.031
+    },
+    "accept_to_included_webhook": {
+      "count": 1122,
+      "min": 42.784,
+      "mean": 500.631,
+      "p50": 477.695,
+      "p90": 924.159,
+      "p95": 939.007,
+      "p99": 953.855,
+      "p999": 1010.175,
+      "max": 1052.671
+    },
+    "accept_to_confirmed_webhook": {
+      "count": 1122,
+      "min": 43.808,
+      "mean": 502.529,
+      "p50": 495.871,
+      "p90": 927.231,
+      "p95": 942.079,
+      "p99": 956.415,
+      "p999": 1011.199,
+      "max": 1068.031
+    }
+  },
+  "rpc": {
+    "source": "proxy",
+    "total_calls": 1576,
+    "boot_calls": 25,
+    "tx_count": 1200,
+    "calls_per_tx": 1.313,
+    "calls_per_tx_with_gas_limit": null,
+    "calls_per_tx_without_gas_limit": null,
+    "credits_per_tx_at_20": 26.26,
+    "credits_per_tx_at_30": 39.39,
+    "by_method": {
+      "eth_estimateGas": {
+        "calls": 453,
+        "calls_per_tx": 0.378,
+        "faulted": 0,
+        "upstream_errors": 78,
+        "latency_ms": {
+          "count": 453,
+          "min": 0.251,
+          "mean": 1.164,
+          "p50": 0.991,
+          "p90": 2.004,
+          "p95": 2.401,
+          "p99": 3.331,
+          "p999": 6.695,
+          "max": 6.695
+        }
+      },
+      "eth_getBlockByNumber": {
+        "calls": 1,
+        "calls_per_tx": 0.001,
+        "faulted": 0,
+        "upstream_errors": 0,
+        "latency_ms": {
+          "count": 1,
+          "min": 0.233,
+          "mean": 0.233,
+          "p50": 0.233,
+          "p90": 0.233,
+          "p95": 0.233,
+          "p99": 0.233,
+          "p999": 0.233,
+          "max": 0.233
+        }
+      },
+      "eth_sendRawTransactionSync": {
+        "calls": 1122,
+        "calls_per_tx": 0.935,
+        "faulted": 0,
+        "upstream_errors": 1,
+        "latency_ms": {
+          "count": 1123,
+          "min": 0.135,
+          "mean": 468.914,
+          "p50": 414.207,
+          "p90": 906.751,
+          "p95": 909.311,
+          "p99": 911.871,
+          "p999": 913.407,
+          "max": 913.919
+        }
+      }
+    },
+    "faults_injected": {}
+  },
+  "engine_process": {
+    "samples": 149,
+    "cpu_pct_avg": 3.166,
+    "cpu_pct_max": 26.636,
+    "rss_mb_avg": 14.691,
+    "rss_mb_max": 17.281
+  },
+  "http": {
+    "202": 1200
+  },
+  "jobs": {
+    "by_kind": {
+      "burn_gas": 65,
+      "fail_gas": 101,
+      "fail_nogas": 78,
+      "hit_gas": 461,
+      "hit_nogas": 375,
+      "transfer": 120
+    },
+    "confirmed_success": 1021,
+    "confirmed_reverted": 101,
+    "failed": 78,
+    "non_terminal": 0,
+    "not_accepted": 0,
+    "indeterminate_posts": 0
+  },
+  "webhooks": {
+    "deliveries": 2322,
+    "unique_events": 2322,
+    "redeliveries": 0,
+    "invalid_signatures": 0,
+    "by_event": {
+      "transaction.confirmed": 1122,
+      "transaction.failed": 78,
+      "transaction.included": 1122
+    },
+    "by_receiver": {
+      "ok": 2322
+    }
+  },
+  "drain": {
+    "waited_s": 1.28175975,
+    "poll_rounds": 3,
+    "timed_out": false,
+    "reason": null
+  },
+  "scenario_metrics": {},
+  "notes": [
+    "on-chain transactions not attributable to a bench job: 0 from signers (cancels/no-ops), 0 from the treasury (top-ups)",
+    "oracle: chain 31337 scanned blocks 1..=152 — 1123 transactions, 901 Hit logs, BenchTarget.total() = 901"
+  ],
+  "harness_warnings": [],
+  "verdict": {
+    "pass": true,
+    "violations": []
+  },
+  "series": [
+    {
+      "t_s": 0.001361917,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 0,
+        "reverted": 0,
+        "failed": 0,
+        "total": 0
+      },
+      "by_chain": {},
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 1.001575042,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 6,
+        "reverted": 0,
+        "failed": 1,
+        "total": 8
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 6,
+          "reverted": 0,
+          "failed": 1,
+          "total": 8
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 2.00224275,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 13,
+        "reverted": 1,
+        "failed": 1,
+        "total": 16
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 13,
+          "reverted": 1,
+          "failed": 1,
+          "total": 16
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 3.003063542,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 21,
+        "reverted": 1,
+        "failed": 1,
+        "total": 24
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 21,
+          "reverted": 1,
+          "failed": 1,
+          "total": 24
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 4.001561667,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 27,
+        "reverted": 3,
+        "failed": 1,
+        "total": 32
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 27,
+          "reverted": 3,
+          "failed": 1,
+          "total": 32
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 5.00251875,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 33,
+        "reverted": 4,
+        "failed": 2,
+        "total": 40
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 33,
+          "reverted": 4,
+          "failed": 2,
+          "total": 40
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 6.001555417,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 41,
+        "reverted": 4,
+        "failed": 2,
+        "total": 48
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 41,
+          "reverted": 4,
+          "failed": 2,
+          "total": 48
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 7.002401875,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 48,
+        "reverted": 4,
+        "failed": 3,
+        "total": 56
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 48,
+          "reverted": 4,
+          "failed": 3,
+          "total": 56
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 8.00438675,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 52,
+        "reverted": 7,
+        "failed": 4,
+        "total": 64
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 52,
+          "reverted": 7,
+          "failed": 4,
+          "total": 64
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 9.002526209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 57,
+        "reverted": 9,
+        "failed": 5,
+        "total": 72
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 57,
+          "reverted": 9,
+          "failed": 5,
+          "total": 72
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 10.00155225,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 65,
+        "reverted": 9,
+        "failed": 5,
+        "total": 80
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 65,
+          "reverted": 9,
+          "failed": 5,
+          "total": 80
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 11.001355542,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 73,
+        "reverted": 9,
+        "failed": 5,
+        "total": 88
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 73,
+          "reverted": 9,
+          "failed": 5,
+          "total": 88
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 12.002228542,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 78,
+        "reverted": 11,
+        "failed": 6,
+        "total": 96
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 78,
+          "reverted": 11,
+          "failed": 6,
+          "total": 96
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 13.001509542,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 85,
+        "reverted": 12,
+        "failed": 6,
+        "total": 104
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 85,
+          "reverted": 12,
+          "failed": 6,
+          "total": 104
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 14.002614375,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 92,
+        "reverted": 12,
+        "failed": 7,
+        "total": 112
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 92,
+          "reverted": 12,
+          "failed": 7,
+          "total": 112
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 15.001504084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 99,
+        "reverted": 13,
+        "failed": 7,
+        "total": 120
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 99,
+          "reverted": 13,
+          "failed": 7,
+          "total": 120
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 16.001965084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 106,
+        "reverted": 13,
+        "failed": 8,
+        "total": 128
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 106,
+          "reverted": 13,
+          "failed": 8,
+          "total": 128
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 17.001652292,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 113,
+        "reverted": 13,
+        "failed": 9,
+        "total": 136
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 113,
+          "reverted": 13,
+          "failed": 9,
+          "total": 136
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 18.001870167,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 121,
+        "reverted": 13,
+        "failed": 9,
+        "total": 144
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 121,
+          "reverted": 13,
+          "failed": 9,
+          "total": 144
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 19.002905459,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 129,
+        "reverted": 13,
+        "failed": 10,
+        "total": 152
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 129,
+          "reverted": 13,
+          "failed": 10,
+          "total": 152
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 20.002513042,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 136,
+        "reverted": 13,
+        "failed": 10,
+        "total": 160
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 136,
+          "reverted": 13,
+          "failed": 10,
+          "total": 160
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 21.001571917,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 142,
+        "reverted": 14,
+        "failed": 11,
+        "total": 168
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 142,
+          "reverted": 14,
+          "failed": 11,
+          "total": 168
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 22.002468917,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 149,
+        "reverted": 14,
+        "failed": 12,
+        "total": 176
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 149,
+          "reverted": 14,
+          "failed": 12,
+          "total": 176
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 23.002092834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 155,
+        "reverted": 15,
+        "failed": 13,
+        "total": 184
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 155,
+          "reverted": 15,
+          "failed": 13,
+          "total": 184
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 24.002279875,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 163,
+        "reverted": 15,
+        "failed": 13,
+        "total": 192
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 163,
+          "reverted": 15,
+          "failed": 13,
+          "total": 192
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 25.001506625,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 171,
+        "reverted": 15,
+        "failed": 13,
+        "total": 200
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 171,
+          "reverted": 15,
+          "failed": 13,
+          "total": 200
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 26.002571125,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 177,
+        "reverted": 16,
+        "failed": 14,
+        "total": 208
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 177,
+          "reverted": 16,
+          "failed": 14,
+          "total": 208
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 27.002860959,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 184,
+        "reverted": 17,
+        "failed": 14,
+        "total": 216
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 184,
+          "reverted": 17,
+          "failed": 14,
+          "total": 216
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 28.001691459,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 192,
+        "reverted": 17,
+        "failed": 14,
+        "total": 224
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 192,
+          "reverted": 17,
+          "failed": 14,
+          "total": 224
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 29.001958417,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 199,
+        "reverted": 17,
+        "failed": 15,
+        "total": 232
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 199,
+          "reverted": 17,
+          "failed": 15,
+          "total": 232
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 30.001248584,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 205,
+        "reverted": 19,
+        "failed": 15,
+        "total": 240
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 205,
+          "reverted": 19,
+          "failed": 15,
+          "total": 240
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 31.00232475,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 213,
+        "reverted": 19,
+        "failed": 16,
+        "total": 248
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 213,
+          "reverted": 19,
+          "failed": 16,
+          "total": 248
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 32.001632834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 220,
+        "reverted": 19,
+        "failed": 16,
+        "total": 256
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 220,
+          "reverted": 19,
+          "failed": 16,
+          "total": 256
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 33.001701792,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 227,
+        "reverted": 20,
+        "failed": 16,
+        "total": 264
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 227,
+          "reverted": 20,
+          "failed": 16,
+          "total": 264
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 34.003191834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 235,
+        "reverted": 20,
+        "failed": 16,
+        "total": 272
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 235,
+          "reverted": 20,
+          "failed": 16,
+          "total": 272
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 35.0025165,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 243,
+        "reverted": 20,
+        "failed": 16,
+        "total": 280
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 243,
+          "reverted": 20,
+          "failed": 16,
+          "total": 280
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 36.001561709,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 249,
+        "reverted": 21,
+        "failed": 17,
+        "total": 288
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 249,
+          "reverted": 21,
+          "failed": 17,
+          "total": 288
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 37.002866,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 257,
+        "reverted": 21,
+        "failed": 17,
+        "total": 296
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 257,
+          "reverted": 21,
+          "failed": 17,
+          "total": 296
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 38.002124125,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 264,
+        "reverted": 21,
+        "failed": 18,
+        "total": 304
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 264,
+          "reverted": 21,
+          "failed": 18,
+          "total": 304
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 39.002098292,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 270,
+        "reverted": 22,
+        "failed": 19,
+        "total": 312
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 270,
+          "reverted": 22,
+          "failed": 19,
+          "total": 312
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 40.001912834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 277,
+        "reverted": 23,
+        "failed": 19,
+        "total": 320
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 277,
+          "reverted": 23,
+          "failed": 19,
+          "total": 320
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 41.002048084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 284,
+        "reverted": 24,
+        "failed": 19,
+        "total": 328
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 284,
+          "reverted": 24,
+          "failed": 19,
+          "total": 328
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 42.001832084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 291,
+        "reverted": 25,
+        "failed": 20,
+        "total": 336
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 291,
+          "reverted": 25,
+          "failed": 20,
+          "total": 336
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 43.002589209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 297,
+        "reverted": 26,
+        "failed": 20,
+        "total": 344
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 297,
+          "reverted": 26,
+          "failed": 20,
+          "total": 344
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 44.001309834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 304,
+        "reverted": 26,
+        "failed": 21,
+        "total": 352
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 304,
+          "reverted": 26,
+          "failed": 21,
+          "total": 352
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 45.001304667,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 310,
+        "reverted": 28,
+        "failed": 22,
+        "total": 360
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 310,
+          "reverted": 28,
+          "failed": 22,
+          "total": 360
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 46.001543709,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 315,
+        "reverted": 29,
+        "failed": 23,
+        "total": 368
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 315,
+          "reverted": 29,
+          "failed": 23,
+          "total": 368
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 47.001517209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 323,
+        "reverted": 29,
+        "failed": 23,
+        "total": 376
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 323,
+          "reverted": 29,
+          "failed": 23,
+          "total": 376
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 48.002137875,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 330,
+        "reverted": 30,
+        "failed": 23,
+        "total": 384
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 330,
+          "reverted": 30,
+          "failed": 23,
+          "total": 384
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 49.002145709,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 337,
+        "reverted": 30,
+        "failed": 24,
+        "total": 392
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 337,
+          "reverted": 30,
+          "failed": 24,
+          "total": 392
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 50.00111825,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 344,
+        "reverted": 31,
+        "failed": 24,
+        "total": 400
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 344,
+          "reverted": 31,
+          "failed": 24,
+          "total": 400
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 51.002313209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 351,
+        "reverted": 32,
+        "failed": 24,
+        "total": 408
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 351,
+          "reverted": 32,
+          "failed": 24,
+          "total": 408
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 52.002292292,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 359,
+        "reverted": 32,
+        "failed": 24,
+        "total": 416
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 359,
+          "reverted": 32,
+          "failed": 24,
+          "total": 416
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 53.002602584,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 366,
+        "reverted": 33,
+        "failed": 25,
+        "total": 424
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 366,
+          "reverted": 33,
+          "failed": 25,
+          "total": 424
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 54.003019959,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 373,
+        "reverted": 33,
+        "failed": 25,
+        "total": 432
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 373,
+          "reverted": 33,
+          "failed": 25,
+          "total": 432
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 55.002119459,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 381,
+        "reverted": 33,
+        "failed": 25,
+        "total": 440
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 381,
+          "reverted": 33,
+          "failed": 25,
+          "total": 440
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 56.001955875,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 388,
+        "reverted": 34,
+        "failed": 25,
+        "total": 448
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 388,
+          "reverted": 34,
+          "failed": 25,
+          "total": 448
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 57.001564584,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 396,
+        "reverted": 34,
+        "failed": 25,
+        "total": 456
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 396,
+          "reverted": 34,
+          "failed": 25,
+          "total": 456
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 58.002218834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 402,
+        "reverted": 35,
+        "failed": 26,
+        "total": 464
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 402,
+          "reverted": 35,
+          "failed": 26,
+          "total": 464
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 59.001644209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 410,
+        "reverted": 35,
+        "failed": 26,
+        "total": 472
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 410,
+          "reverted": 35,
+          "failed": 26,
+          "total": 472
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 60.0014935,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 415,
+        "reverted": 38,
+        "failed": 26,
+        "total": 480
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 415,
+          "reverted": 38,
+          "failed": 26,
+          "total": 480
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 61.002260084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 421,
+        "reverted": 38,
+        "failed": 28,
+        "total": 488
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 421,
+          "reverted": 38,
+          "failed": 28,
+          "total": 488
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 62.002679667,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 429,
+        "reverted": 38,
+        "failed": 28,
+        "total": 496
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 429,
+          "reverted": 38,
+          "failed": 28,
+          "total": 496
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 63.003084292,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 435,
+        "reverted": 39,
+        "failed": 29,
+        "total": 504
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 435,
+          "reverted": 39,
+          "failed": 29,
+          "total": 504
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 64.001468875,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 443,
+        "reverted": 39,
+        "failed": 29,
+        "total": 512
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 443,
+          "reverted": 39,
+          "failed": 29,
+          "total": 512
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 65.002245875,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 448,
+        "reverted": 41,
+        "failed": 30,
+        "total": 520
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 448,
+          "reverted": 41,
+          "failed": 30,
+          "total": 520
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 66.002694167,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 454,
+        "reverted": 43,
+        "failed": 30,
+        "total": 528
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 454,
+          "reverted": 43,
+          "failed": 30,
+          "total": 528
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 67.003174667,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 460,
+        "reverted": 44,
+        "failed": 31,
+        "total": 536
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 460,
+          "reverted": 44,
+          "failed": 31,
+          "total": 536
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 68.003114084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 468,
+        "reverted": 44,
+        "failed": 31,
+        "total": 544
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 468,
+          "reverted": 44,
+          "failed": 31,
+          "total": 544
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 69.002394625,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 474,
+        "reverted": 45,
+        "failed": 32,
+        "total": 552
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 474,
+          "reverted": 45,
+          "failed": 32,
+          "total": 552
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 70.001266167,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 482,
+        "reverted": 45,
+        "failed": 32,
+        "total": 560
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 482,
+          "reverted": 45,
+          "failed": 32,
+          "total": 560
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 71.001933959,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 490,
+        "reverted": 45,
+        "failed": 32,
+        "total": 568
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 490,
+          "reverted": 45,
+          "failed": 32,
+          "total": 568
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 72.002080625,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 497,
+        "reverted": 45,
+        "failed": 33,
+        "total": 576
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 497,
+          "reverted": 45,
+          "failed": 33,
+          "total": 576
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 73.002480625,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 504,
+        "reverted": 45,
+        "failed": 34,
+        "total": 584
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 504,
+          "reverted": 45,
+          "failed": 34,
+          "total": 584
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 74.001954417,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 508,
+        "reverted": 48,
+        "failed": 35,
+        "total": 592
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 508,
+          "reverted": 48,
+          "failed": 35,
+          "total": 592
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 75.002246125,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 516,
+        "reverted": 48,
+        "failed": 35,
+        "total": 600
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 516,
+          "reverted": 48,
+          "failed": 35,
+          "total": 600
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 76.003030292,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 524,
+        "reverted": 48,
+        "failed": 35,
+        "total": 608
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 524,
+          "reverted": 48,
+          "failed": 35,
+          "total": 608
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 77.002787084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 531,
+        "reverted": 49,
+        "failed": 35,
+        "total": 616
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 531,
+          "reverted": 49,
+          "failed": 35,
+          "total": 616
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 78.002216417,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 538,
+        "reverted": 49,
+        "failed": 36,
+        "total": 624
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 538,
+          "reverted": 49,
+          "failed": 36,
+          "total": 624
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 79.002617917,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 545,
+        "reverted": 49,
+        "failed": 37,
+        "total": 632
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 545,
+          "reverted": 49,
+          "failed": 37,
+          "total": 632
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 80.001924917,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 552,
+        "reverted": 49,
+        "failed": 39,
+        "total": 640
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 552,
+          "reverted": 49,
+          "failed": 39,
+          "total": 640
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 81.002554084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 557,
+        "reverted": 49,
+        "failed": 41,
+        "total": 648
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 557,
+          "reverted": 49,
+          "failed": 41,
+          "total": 648
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 82.002473209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 563,
+        "reverted": 51,
+        "failed": 41,
+        "total": 656
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 563,
+          "reverted": 51,
+          "failed": 41,
+          "total": 656
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 83.009148542,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 571,
+        "reverted": 51,
+        "failed": 41,
+        "total": 664
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 571,
+          "reverted": 51,
+          "failed": 41,
+          "total": 664
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 84.002248542,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 577,
+        "reverted": 52,
+        "failed": 42,
+        "total": 672
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 577,
+          "reverted": 52,
+          "failed": 42,
+          "total": 672
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 85.00271625,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 584,
+        "reverted": 53,
+        "failed": 42,
+        "total": 680
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 584,
+          "reverted": 53,
+          "failed": 42,
+          "total": 680
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 86.002951375,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 588,
+        "reverted": 54,
+        "failed": 45,
+        "total": 688
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 588,
+          "reverted": 54,
+          "failed": 45,
+          "total": 688
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 87.001596834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 596,
+        "reverted": 54,
+        "failed": 45,
+        "total": 696
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 596,
+          "reverted": 54,
+          "failed": 45,
+          "total": 696
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 88.001708167,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 604,
+        "reverted": 54,
+        "failed": 45,
+        "total": 704
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 604,
+          "reverted": 54,
+          "failed": 45,
+          "total": 704
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 89.001870417,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 612,
+        "reverted": 54,
+        "failed": 45,
+        "total": 712
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 612,
+          "reverted": 54,
+          "failed": 45,
+          "total": 712
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 90.002232625,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 617,
+        "reverted": 56,
+        "failed": 46,
+        "total": 720
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 617,
+          "reverted": 56,
+          "failed": 46,
+          "total": 720
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 91.002521459,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 622,
+        "reverted": 58,
+        "failed": 47,
+        "total": 728
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 622,
+          "reverted": 58,
+          "failed": 47,
+          "total": 728
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 92.002174084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 629,
+        "reverted": 59,
+        "failed": 47,
+        "total": 736
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 629,
+          "reverted": 59,
+          "failed": 47,
+          "total": 736
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 93.002763375,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 635,
+        "reverted": 60,
+        "failed": 48,
+        "total": 744
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 635,
+          "reverted": 60,
+          "failed": 48,
+          "total": 744
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 94.003204042,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 642,
+        "reverted": 60,
+        "failed": 49,
+        "total": 752
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 642,
+          "reverted": 60,
+          "failed": 49,
+          "total": 752
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 95.002269917,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 648,
+        "reverted": 60,
+        "failed": 51,
+        "total": 760
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 648,
+          "reverted": 60,
+          "failed": 51,
+          "total": 760
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 96.0023055,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 654,
+        "reverted": 61,
+        "failed": 52,
+        "total": 768
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 654,
+          "reverted": 61,
+          "failed": 52,
+          "total": 768
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 97.002168875,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 660,
+        "reverted": 63,
+        "failed": 52,
+        "total": 776
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 660,
+          "reverted": 63,
+          "failed": 52,
+          "total": 776
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 98.002559667,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 668,
+        "reverted": 63,
+        "failed": 52,
+        "total": 784
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 668,
+          "reverted": 63,
+          "failed": 52,
+          "total": 784
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 99.001905625,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 675,
+        "reverted": 64,
+        "failed": 52,
+        "total": 792
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 675,
+          "reverted": 64,
+          "failed": 52,
+          "total": 792
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 100.002631834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 683,
+        "reverted": 64,
+        "failed": 52,
+        "total": 800
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 683,
+          "reverted": 64,
+          "failed": 52,
+          "total": 800
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 101.002501042,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 689,
+        "reverted": 66,
+        "failed": 52,
+        "total": 808
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 689,
+          "reverted": 66,
+          "failed": 52,
+          "total": 808
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 102.0026845,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 697,
+        "reverted": 66,
+        "failed": 52,
+        "total": 816
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 697,
+          "reverted": 66,
+          "failed": 52,
+          "total": 816
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 103.001707167,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 704,
+        "reverted": 67,
+        "failed": 52,
+        "total": 824
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 704,
+          "reverted": 67,
+          "failed": 52,
+          "total": 824
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 104.001526292,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 710,
+        "reverted": 69,
+        "failed": 52,
+        "total": 832
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 710,
+          "reverted": 69,
+          "failed": 52,
+          "total": 832
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 105.001504209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 717,
+        "reverted": 70,
+        "failed": 53,
+        "total": 840
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 717,
+          "reverted": 70,
+          "failed": 53,
+          "total": 840
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 106.002669209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 722,
+        "reverted": 72,
+        "failed": 53,
+        "total": 848
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 722,
+          "reverted": 72,
+          "failed": 53,
+          "total": 848
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 107.002897084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 728,
+        "reverted": 73,
+        "failed": 55,
+        "total": 856
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 728,
+          "reverted": 73,
+          "failed": 55,
+          "total": 856
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 108.002142584,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 733,
+        "reverted": 74,
+        "failed": 56,
+        "total": 864
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 733,
+          "reverted": 74,
+          "failed": 56,
+          "total": 864
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 109.00238725,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 739,
+        "reverted": 74,
+        "failed": 58,
+        "total": 872
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 739,
+          "reverted": 74,
+          "failed": 58,
+          "total": 872
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 110.002913042,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 746,
+        "reverted": 74,
+        "failed": 59,
+        "total": 880
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 746,
+          "reverted": 74,
+          "failed": 59,
+          "total": 880
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 111.002339459,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 754,
+        "reverted": 74,
+        "failed": 59,
+        "total": 888
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 754,
+          "reverted": 74,
+          "failed": 59,
+          "total": 888
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 112.002134042,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 760,
+        "reverted": 75,
+        "failed": 60,
+        "total": 896
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 760,
+          "reverted": 75,
+          "failed": 60,
+          "total": 896
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 113.003519625,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 765,
+        "reverted": 78,
+        "failed": 60,
+        "total": 904
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 765,
+          "reverted": 78,
+          "failed": 60,
+          "total": 904
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 114.003061209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 773,
+        "reverted": 78,
+        "failed": 60,
+        "total": 912
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 773,
+          "reverted": 78,
+          "failed": 60,
+          "total": 912
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 115.00300025,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 781,
+        "reverted": 78,
+        "failed": 60,
+        "total": 920
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 781,
+          "reverted": 78,
+          "failed": 60,
+          "total": 920
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 116.002896375,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 789,
+        "reverted": 78,
+        "failed": 60,
+        "total": 928
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 789,
+          "reverted": 78,
+          "failed": 60,
+          "total": 928
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 117.002136875,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 797,
+        "reverted": 78,
+        "failed": 60,
+        "total": 936
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 797,
+          "reverted": 78,
+          "failed": 60,
+          "total": 936
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 118.001791084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 804,
+        "reverted": 78,
+        "failed": 61,
+        "total": 944
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 804,
+          "reverted": 78,
+          "failed": 61,
+          "total": 944
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 119.00227425,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 811,
+        "reverted": 78,
+        "failed": 62,
+        "total": 952
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 811,
+          "reverted": 78,
+          "failed": 62,
+          "total": 952
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 120.002372417,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 818,
+        "reverted": 78,
+        "failed": 63,
+        "total": 960
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 818,
+          "reverted": 78,
+          "failed": 63,
+          "total": 960
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 121.002708709,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 824,
+        "reverted": 78,
+        "failed": 65,
+        "total": 968
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 824,
+          "reverted": 78,
+          "failed": 65,
+          "total": 968
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 122.003852042,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 831,
+        "reverted": 78,
+        "failed": 66,
+        "total": 976
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 831,
+          "reverted": 78,
+          "failed": 66,
+          "total": 976
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 123.001783584,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 838,
+        "reverted": 78,
+        "failed": 67,
+        "total": 984
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 838,
+          "reverted": 78,
+          "failed": 67,
+          "total": 984
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 124.002203959,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 846,
+        "reverted": 78,
+        "failed": 67,
+        "total": 992
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 846,
+          "reverted": 78,
+          "failed": 67,
+          "total": 992
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 125.002849417,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 854,
+        "reverted": 78,
+        "failed": 67,
+        "total": 1000
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 854,
+          "reverted": 78,
+          "failed": 67,
+          "total": 1000
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 126.0017855,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 859,
+        "reverted": 80,
+        "failed": 68,
+        "total": 1008
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 859,
+          "reverted": 80,
+          "failed": 68,
+          "total": 1008
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 127.001643334,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 867,
+        "reverted": 80,
+        "failed": 68,
+        "total": 1016
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 867,
+          "reverted": 80,
+          "failed": 68,
+          "total": 1016
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 128.002492625,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 873,
+        "reverted": 82,
+        "failed": 68,
+        "total": 1024
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 873,
+          "reverted": 82,
+          "failed": 68,
+          "total": 1024
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 129.001484167,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 879,
+        "reverted": 83,
+        "failed": 69,
+        "total": 1032
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 879,
+          "reverted": 83,
+          "failed": 69,
+          "total": 1032
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 130.001834084,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 886,
+        "reverted": 84,
+        "failed": 69,
+        "total": 1040
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 886,
+          "reverted": 84,
+          "failed": 69,
+          "total": 1040
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 131.00252775,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 894,
+        "reverted": 84,
+        "failed": 69,
+        "total": 1048
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 894,
+          "reverted": 84,
+          "failed": 69,
+          "total": 1048
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 132.002237959,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 902,
+        "reverted": 84,
+        "failed": 69,
+        "total": 1056
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 902,
+          "reverted": 84,
+          "failed": 69,
+          "total": 1056
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 133.002834209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 908,
+        "reverted": 86,
+        "failed": 69,
+        "total": 1064
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 908,
+          "reverted": 86,
+          "failed": 69,
+          "total": 1064
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 134.002147209,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 914,
+        "reverted": 88,
+        "failed": 69,
+        "total": 1072
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 914,
+          "reverted": 88,
+          "failed": 69,
+          "total": 1072
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 135.001835667,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 921,
+        "reverted": 89,
+        "failed": 69,
+        "total": 1080
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 921,
+          "reverted": 89,
+          "failed": 69,
+          "total": 1080
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 136.001906542,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 927,
+        "reverted": 90,
+        "failed": 70,
+        "total": 1088
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 927,
+          "reverted": 90,
+          "failed": 70,
+          "total": 1088
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 137.0026675,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 933,
+        "reverted": 90,
+        "failed": 72,
+        "total": 1096
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 933,
+          "reverted": 90,
+          "failed": 72,
+          "total": 1096
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 138.00194675,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 941,
+        "reverted": 90,
+        "failed": 72,
+        "total": 1104
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 941,
+          "reverted": 90,
+          "failed": 72,
+          "total": 1104
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 139.00210325,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 946,
+        "reverted": 92,
+        "failed": 73,
+        "total": 1112
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 946,
+          "reverted": 92,
+          "failed": 73,
+          "total": 1112
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 140.002268709,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 954,
+        "reverted": 92,
+        "failed": 73,
+        "total": 1120
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 954,
+          "reverted": 92,
+          "failed": 73,
+          "total": 1120
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 141.002533125,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 958,
+        "reverted": 96,
+        "failed": 73,
+        "total": 1128
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 958,
+          "reverted": 96,
+          "failed": 73,
+          "total": 1128
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 142.0022515,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 965,
+        "reverted": 96,
+        "failed": 74,
+        "total": 1136
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 965,
+          "reverted": 96,
+          "failed": 74,
+          "total": 1136
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 143.0026995,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 971,
+        "reverted": 98,
+        "failed": 74,
+        "total": 1144
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 971,
+          "reverted": 98,
+          "failed": 74,
+          "total": 1144
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 144.001578167,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 979,
+        "reverted": 98,
+        "failed": 74,
+        "total": 1152
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 979,
+          "reverted": 98,
+          "failed": 74,
+          "total": 1152
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 145.001740834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 987,
+        "reverted": 98,
+        "failed": 74,
+        "total": 1160
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 987,
+          "reverted": 98,
+          "failed": 74,
+          "total": 1160
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 146.002203834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 994,
+        "reverted": 98,
+        "failed": 75,
+        "total": 1168
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 994,
+          "reverted": 98,
+          "failed": 75,
+          "total": 1168
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 147.002904292,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 1001,
+        "reverted": 99,
+        "failed": 75,
+        "total": 1176
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 1001,
+          "reverted": 99,
+          "failed": 75,
+          "total": 1176
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 148.002927667,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 1008,
+        "reverted": 99,
+        "failed": 77,
+        "total": 1184
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 1008,
+          "reverted": 99,
+          "failed": 77,
+          "total": 1184
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 149.002547459,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 1013,
+        "reverted": 101,
+        "failed": 78,
+        "total": 1192
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 1013,
+          "reverted": 101,
+          "failed": 78,
+          "total": 1192
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    },
+    {
+      "t_s": 150.001989834,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 1,
+        "included": 0,
+        "succeeded": 1020,
+        "reverted": 101,
+        "failed": 78,
+        "total": 1200
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 1,
+          "included": 0,
+          "succeeded": 1020,
+          "reverted": 101,
+          "failed": 78,
+          "total": 1200
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 1,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.1
+    },
+    {
+      "t_s": 151.002823875,
+      "ok": true,
+      "counts": {
+        "queued": 0,
+        "processing": 0,
+        "in_flight": 0,
+        "included": 0,
+        "succeeded": 1021,
+        "reverted": 101,
+        "failed": 78,
+        "total": 1200
+      },
+      "by_chain": {
+        "31337": {
+          "queued": 0,
+          "processing": 0,
+          "in_flight": 0,
+          "included": 0,
+          "succeeded": 1021,
+          "reverted": 101,
+          "failed": 78,
+          "total": 1200
+        }
+      },
+      "queue_depth": 0,
+      "busy_pairs": 0,
+      "paused_pairs": 0,
+      "total_pairs": 10,
+      "utilisation": 0.0
+    }
+  ]
+}
