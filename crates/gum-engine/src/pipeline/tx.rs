@@ -390,7 +390,7 @@ impl<'a> TxDriver<'a> {
 
         let confirm_now = chain.confirm_check() == ConfirmCheck::Immediate;
         if let Some(settler) = self.engine.settler(chain.chain_id) {
-            let op = SettleOp::Inclusion { attempt: attempt.clone(), inclusion: inclusion.clone(), confirm_now, reincluded };
+            let op = SettleOp::Inclusion { attempt: Box::new(attempt.clone()), inclusion: Box::new(inclusion.clone()), confirm_now, reincluded };
             if settler.send(op).await.is_err() {
                 tracing::error!(event = "settle.queue_closed", chain = chain.chain_id, tx_hash = %hash_hex(&attempt.tx_hash), "settle queue is closed; recovery will re-derive this inclusion");
             }
@@ -729,6 +729,7 @@ pub fn inclusion_from(pair: &Pair, attempt: &Attempt, receipt: &Receipt) -> Opti
         effective_gas_price: receipt.effective_gas_price_u128(),
         fee_paid: cost.fee_paid,
         l1_fee: cost.l1_fee,
+        receipt: serde_json::to_value(receipt).unwrap_or(serde_json::Value::Null),
     })
 }
 

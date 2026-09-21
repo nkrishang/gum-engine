@@ -54,7 +54,8 @@ Anvil's public dev keys: account 0 is the treasury and accounts 1 to 5 are the s
   estimates gas, and a reverting simulation fails the job before it costs anything.
 - Each transaction produces two webhooks: `transaction.included` on receipt, and
   `transaction.confirmed` after a per-chain delay. Jobs that never reach the chain get
-  `transaction.failed`. Webhooks are HMAC-signed and delivered at least once.
+  `transaction.failed`. Both carry the node's full receipt, logs included. Webhooks are HMAC-signed and
+  delivered at least once.
 - An `Idempotency-Key` header makes retries safe.
 
 Full contract: [`docs/api-contract.md`](docs/api-contract.md).

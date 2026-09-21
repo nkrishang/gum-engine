@@ -311,6 +311,7 @@ async fn get_transaction(State(engine): State<Arc<Engine>>, Path(job_id): Path<S
         "effective_gas_price": job.effective_gas_price,
         "fee_paid": job.fee_paid,
         "l1_fee": job.l1_fee,
+        "receipt": job.receipt,
         "error": error,
         "attempts": attempts.iter().map(|a| json!({
             "tx_hash": hash_hex(&a.tx_hash),

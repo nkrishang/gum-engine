@@ -235,7 +235,7 @@ impl Store {
             (SlotOwner::Job(job_id), AttemptPurpose::Job) => {
                 let sql = format!(
                     "UPDATE jobs SET status = 'included', outcome = $2, tx_hash = $3, block_number = $4, block_hash = $5, gas_used = $6::numeric, \
-                     effective_gas_price = $7::numeric, fee_paid = $8::numeric, l1_fee = $9::numeric, included_at = now(), webhook_seq = webhook_seq + 1 \
+                     effective_gas_price = $7::numeric, fee_paid = $8::numeric, l1_fee = $9::numeric, receipt = $10, included_at = now(), webhook_seq = webhook_seq + 1 \
                      WHERE id = $1 AND status IN ('sent', 'cancelling') RETURNING {JOB_RETURNING}"
                 );
                 let row = sqlx::query(sqlx::AssertSqlSafe(sql))
@@ -248,6 +248,7 @@ impl Store {
                     .bind(inc.effective_gas_price.to_string())
                     .bind(inc.fee_paid.to_string())
                     .bind(inc.l1_fee.map(|f| f.to_string()))
+                    .bind(&inc.receipt)
                     .fetch_optional(&mut *tx)
                     .await?
                     .ok_or(StoreError::StateConflict { entity: "job", id: job_id.to_string(), expected: "sent|cancelling" })?;
@@ -279,7 +280,7 @@ impl Store {
     /// The transaction is still mined, but in a different block than first recorded (a shallow re-org, or
     /// a pre-confirmation receipt whose block hash was provisional). Keeps the stored inclusion — and with
     /// it the `transaction.confirmed` webhook — pointing at the canonical block.
-    pub async fn update_inclusion_block(&self, attempt: &Attempt, block_number: u64, block_hash: &alloy::primitives::B256) -> Result<(), StoreError> {
+    pub async fn update_inclusion_block(&self, attempt: &Attempt, block_number: u64, block_hash: &alloy::primitives::B256, receipt: &serde_json::Value) -> Result<(), StoreError> {
         let mut tx = self.pipeline.begin().await?;
         sqlx::query("UPDATE tx_attempts SET block_number = $2, block_hash = $3, updated_at = now() WHERE id = $1 AND status = 'included'")
             .bind(attempt.id)
@@ -288,10 +289,11 @@ impl Store {
             .execute(&mut *tx)
             .await?;
         if let (SlotOwner::Job(job_id), AttemptPurpose::Job) = (attempt.owner, attempt.purpose) {
-            sqlx::query("UPDATE jobs SET block_number = $2, block_hash = $3 WHERE id = $1 AND status = 'included'")
+            sqlx::query("UPDATE jobs SET block_number = $2, block_hash = $3, receipt = $4 WHERE id = $1 AND status = 'included'")
                 .bind(job_id)
                 .bind(block_number as i64)
                 .bind(hash_hex(block_hash))
+                .bind(receipt)
                 .execute(&mut *tx)
                 .await?;
         }
@@ -324,7 +326,7 @@ impl Store {
 
         match (attempt.owner, attempt.purpose) {
             (SlotOwner::Job(id), AttemptPurpose::Job) => {
-                sqlx::query("UPDATE jobs SET status = 'sent', outcome = NULL, block_number = NULL, block_hash = NULL, gas_used = NULL, effective_gas_price = NULL, fee_paid = NULL, l1_fee = NULL, included_at = NULL WHERE id = $1 AND status = 'included'")
+                sqlx::query("UPDATE jobs SET status = 'sent', outcome = NULL, block_number = NULL, block_hash = NULL, gas_used = NULL, effective_gas_price = NULL, fee_paid = NULL, l1_fee = NULL, receipt = NULL, included_at = NULL WHERE id = $1 AND status = 'included'")
                     .bind(id)
                     .execute(&mut *tx)
                     .await?;
@@ -437,7 +439,7 @@ impl Store {
 const JOB_RETURNING: &str = "id, chain_id, to_addr, data, value::text AS value, gas_limit, deadline, webhook_url, status, outcome, \
      signer, nonce, tx_hash, block_number, block_hash, gas_used::text AS gas_used, \
      effective_gas_price::text AS effective_gas_price, fee_paid::text AS fee_paid, l1_fee::text AS l1_fee, \
-     error_code, error_message, revert_data, created_at, sent_at, included_at, confirmed_at, failed_at, webhook_seq";
+     error_code, error_message, revert_data, receipt, created_at, sent_at, included_at, confirmed_at, failed_at, webhook_seq";
 
 async fn confirm_in_tx(tx: &mut Transaction<'_, Postgres>, attempt: &Attempt) -> Result<Settled, StoreError> {
     // The raw bytes are only needed for rebroadcast; a confirmed transaction never needs that again.

@@ -55,6 +55,7 @@ fn payload(event_id: Uuid, job: &JobRow, event: WebhookEvent, sequence: i32, rei
         "effective_gas_price": job.effective_gas_price,
         "fee_paid": job.fee_paid,
         "reincluded": reincluded,
+        "receipt": job.receipt,
         "error": error,
         "timestamp": Utc::now().to_rfc3339_opts(chrono::SecondsFormat::Millis, true),
     })

@@ -6,9 +6,11 @@
 use std::collections::BTreeMap;
 
 use alloy::primitives::{B256, U256, U64};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Deserialize)]
+/// Serialises back to the node's own shape: typed fields are re-encoded as hex quantities and every
+/// other field (`logs`, `contractAddress`, `l1Fee`, …) is carried through untouched in `other`.
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Receipt {
     pub transaction_hash: B256,
@@ -63,5 +65,46 @@ impl Block {
 
     pub fn base_fee_u128(&self) -> Option<u128> {
         self.base_fee_per_gas.map(|f| f.saturating_to::<u128>())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// Callers get the receipt we store, so nothing the node sent may be lost on the way through:
+    /// not the logs, not fields this engine has never heard of.
+    #[test]
+    fn receipt_round_trips_with_every_field() {
+        let node = serde_json::json!({
+            "transactionHash": "0x3300000000000000000000000000000000000000000000000000000000000000",
+            "transactionIndex": "0x2",
+            "blockNumber": "0x2d97a0e",
+            "blockHash": "0x4400000000000000000000000000000000000000000000000000000000000000",
+            "from": "0x6aeacf052d05b11a6c96cb3b39d43a982bca36c1",
+            "to": "0x000000000000000000000000000000000000dead",
+            "contractAddress": null,
+            "status": "0x1",
+            "type": "0x2",
+            "gasUsed": "0xb0c4",
+            "cumulativeGasUsed": "0x1b0c4",
+            "effectiveGasPrice": "0x4c4b40",
+            "logsBloom": "0x00",
+            "logs": [{
+                "address": "0x000000000000000000000000000000000000dead",
+                "topics": ["0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"],
+                "data": "0x01",
+                "logIndex": "0x0",
+                "removed": false
+            }],
+            "l1Fee": "0x2540be400",
+            "l1GasUsed": "0x640",
+            "someFutureField": {"nested": [1, 2, 3]}
+        });
+        let receipt: Receipt = serde_json::from_value(node.clone()).expect("receipt parses");
+        assert!(receipt.succeeded());
+        assert_eq!(receipt.extra_u256("l1Fee"), Some(U256::from(0x2540be400u64)));
+        let back = serde_json::to_value(&receipt).expect("receipt serialises");
+        assert_eq!(back, node, "the receipt handed to callers must equal the receipt the node returned");
     }
 }

@@ -71,7 +71,7 @@ pub async fn recover_pair(engine: &Arc<Engine>, pair: &Arc<Pair>) {
                         chain.observe_head(inclusion.block_number, Some(inclusion.block_hash));
                         if chain.confirm_check() == ConfirmCheck::Immediate {
                             if let Some(settler) = engine.settler(chain.chain_id) {
-                                let _ = settler.send(SettleOp::Confirmation { attempt: included.clone() }).await;
+                                let _ = settler.send(SettleOp::Confirmation { attempt: Box::new(included.clone()) }).await;
                             }
                             accounting::confirmed(engine, pair, &included, &inclusion);
                         } else if let Some(confirmer) = engine.confirmers.read().get(&chain.chain_id) {

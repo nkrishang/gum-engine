@@ -258,6 +258,8 @@ pub struct Inclusion {
     /// Total native cost to the sender as defined by the chain (may exceed gas_used * price).
     pub fee_paid: U256,
     pub l1_fee: Option<U256>,
+    /// The node's receipt in full, passed on to the caller verbatim.
+    pub receipt: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize)]

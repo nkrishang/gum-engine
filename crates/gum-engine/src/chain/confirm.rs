@@ -160,7 +160,7 @@ async fn check(chain: &ChainCtx, item: &PendingConfirmation, finalized: Option<&
 
 async fn confirm(engine: &Arc<Engine>, chain: &Arc<ChainCtx>, item: &PendingConfirmation) {
     if let Some(settler) = engine.settler(chain.chain_id) {
-        let _ = settler.send(SettleOp::Confirmation { attempt: item.attempt.clone() }).await;
+        let _ = settler.send(SettleOp::Confirmation { attempt: Box::new(item.attempt.clone()) }).await;
     }
     if let Some(pair) = engine.pair(&PairKey { chain_id: chain.chain_id, signer: item.attempt.signer }) {
         accounting::confirmed(engine, &pair, &item.attempt, &item.inclusion);
@@ -182,8 +182,9 @@ async fn on_missing(engine: &Arc<Engine>, chain: &Arc<ChainCtx>, mut item: Pendi
                     tracing::warn!(event = "confirm.moved", chain = chain.chain_id, signer = %addr_hex(&key.signer), tx_hash = %hash_hex(&item.attempt.tx_hash), from_block = item.inclusion.block_number, to_block = moved.block_number, "transaction moved to a different block; re-checking there");
                     item.inclusion.block_number = moved.block_number;
                     item.inclusion.block_hash = moved.block_hash;
+                    item.inclusion.receipt = moved.receipt.clone();
                     crate::pipeline::settle::flush_chain(engine, chain.chain_id).await;
-                    if let Err(e) = engine.store.update_inclusion_block(&item.attempt, moved.block_number, &moved.block_hash).await {
+                    if let Err(e) = engine.store.update_inclusion_block(&item.attempt, moved.block_number, &moved.block_hash, &moved.receipt).await {
                         tracing::warn!(event = "confirm.block_update_failed", chain = chain.chain_id, code = e.code(), error = %e, "could not record the transaction's new block; will retry with the next check");
                     }
                 }

@@ -55,6 +55,7 @@ pub struct JobRow {
     pub error_code: Option<String>,
     pub error_message: Option<String>,
     pub revert_data: Option<Vec<u8>>,
+    pub receipt: Option<serde_json::Value>,
     pub created_at: DateTime<Utc>,
     pub sent_at: Option<DateTime<Utc>>,
     pub included_at: Option<DateTime<Utc>>,
@@ -65,7 +66,7 @@ pub struct JobRow {
 const JOB_COLUMNS: &str = "id, chain_id, to_addr, data, value::text AS value, gas_limit, deadline, webhook_url, status, outcome, \
      signer, nonce, tx_hash, block_number, block_hash, gas_used::text AS gas_used, \
      effective_gas_price::text AS effective_gas_price, fee_paid::text AS fee_paid, l1_fee::text AS l1_fee, \
-     error_code, error_message, revert_data, created_at, sent_at, included_at, confirmed_at, failed_at";
+     error_code, error_message, revert_data, receipt, created_at, sent_at, included_at, confirmed_at, failed_at";
 
 pub(crate) fn job_row(row: &sqlx::postgres::PgRow) -> Result<JobRow, StoreError> {
     Ok(JobRow {
@@ -91,6 +92,7 @@ pub(crate) fn job_row(row: &sqlx::postgres::PgRow) -> Result<JobRow, StoreError>
         error_code: row.try_get("error_code")?,
         error_message: row.try_get("error_message")?,
         revert_data: row.try_get("revert_data")?,
+        receipt: row.try_get("receipt")?,
         created_at: row.try_get("created_at")?,
         sent_at: row.try_get("sent_at")?,
         included_at: row.try_get("included_at")?,

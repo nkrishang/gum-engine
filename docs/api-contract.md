@@ -44,6 +44,7 @@ Error body: `{"error":{"code":"<code>","message":"<human text>"}}`.
   "signer": "0x…", "nonce": 12,      // null until bound
   "tx_hash": "0x…", "block_number": 100, "block_hash": "0x…",
   "gas_used": "21000", "effective_gas_price": "1000000007", "fee_paid": "21000000147000", "l1_fee": null,
+  "receipt": null,                   // the node's full receipt once mined — see "The receipt" below
   "error": null,                     // {"code":"simulation_reverted|invalid_tx|expired|stuck_cancelled|cancelled|internal","message":"…","revert_data":"0x…"}
   "attempts": [{"tx_hash":"0x…","nonce":12,"purpose":"job|cancel","status":"…","gas_limit":"100000",
                 "max_fee_per_gas":"…","max_priority_fee_per_gas":"…","created_at":"…"}],
@@ -72,9 +73,22 @@ Error body: `{"error":{"code":"<code>","message":"<human text>"}}`.
   "job_id": "…", "chain_id": 31337, "status": "included", "outcome": "success",
   "tx_hash": "0x…", "block_number": 100, "block_hash": "0x…", "signer": "0x…", "nonce": 12,
   "gas_used": "21000", "effective_gas_price": "…", "fee_paid": "…",
+  "receipt": { "transactionHash": "0x…", "status": "0x1", "logs": [ … ], … },
   "reincluded": false, "error": null, "timestamp": "…"
 }
 ```
+
+### The receipt
+
+`receipt` is the transaction receipt **exactly as the chain's node returned it**, unmodified: `logs` (the
+events your call emitted), `logsBloom`, `from`, `to`, `contractAddress`, `transactionIndex`,
+`cumulativeGasUsed`, `type`, and whatever the chain adds (`l1Fee`, `l1GasUsed`, … on OP Stack chains;
+`gasUsedForL1`, `l1BlockNumber` on Arbitrum). Values keep the node's encoding (hex quantities), unlike the
+summary fields beside it, which are decimal strings.
+
+It is present on `transaction.included`, `transaction.confirmed` and the status route, and `null` on
+`transaction.failed` and for jobs that are not mined yet. If a re-org moves the transaction, the receipt is
+replaced with the one from the block it finally landed in.
 
 `sequence` increases per job (1 = first event). Headers: `X-Gum-Event-Id`, `X-Gum-Job-Id`,
 `X-Gum-Signature: t=<unix seconds>,v1=<hex hmac_sha256(signing_secret, "<t>.<raw body>")>`.

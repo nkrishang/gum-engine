@@ -23,13 +23,13 @@ pub const SETTLE_QUEUE_DEPTH: usize = 10_000;
 #[derive(Debug)]
 pub enum SettleOp {
     Inclusion {
-        attempt: Attempt,
-        inclusion: Inclusion,
+        attempt: Box<Attempt>,
+        inclusion: Box<Inclusion>,
         confirm_now: bool,
         reincluded: bool,
     },
     Confirmation {
-        attempt: Attempt,
+        attempt: Box<Attempt>,
     },
     /// Barrier used by shutdown and tests: resolves once everything queued before it is written.
     Flush(tokio::sync::oneshot::Sender<()>),
