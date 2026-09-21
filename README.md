@@ -89,7 +89,7 @@ POST /v1/transactions ─► Postgres (durable) ─► per-chain queue
 | **AWS KMS signers** | Private keys never leave KMS. Each transaction costs exactly one `Sign` call. Local keys sit behind the same interface for development. |
 | **QuickNode RPC** | The engine is built around its per-response billing: it sends with `eth_sendRawTransactionSync`, which returns the receipt in the same call, and tracks nonces, fees and balances locally. That is about 1.3 RPC calls per transaction. |
 | **Own JSON-RPC client** | `alloy` is used for primitives and signing only. A thin client over `reqwest` gives exact control of what goes over the wire, and separates "the node said no" from "we don't know if the node saw this", which nonce safety depends on. |
-| **Railway** | Dockerfile deploy on a private network, with no public domain since the API has no auth. |
+| **Railway** | Dockerfile deploy on a private network, with no public domain since the API has no auth. The engine runs its own migrations at boot. |
 
 Chain-specific behaviour lives behind one trait, `ChainAdapter`. Adding a chain of a supported kind
 (OP Stack, Arbitrum Orbit, any standard EIP-1559 chain) is a config block. A new kind is one file plus

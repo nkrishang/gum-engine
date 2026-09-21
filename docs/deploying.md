@@ -1,7 +1,7 @@
 # Deploying and operating
 
-gum-engine deploys to [Railway](https://railway.com) as a single service next to a Railway Postgres.
-`Dockerfile` and `railway.toml` in the repo root are all Railway needs.
+gum-engine deploys to [Railway](https://railway.com) as a single service next to a Railway Postgres,
+built from the `Dockerfile` in the repo root. The engine applies its own database migrations at boot.
 
 ## Setup checklist
 
@@ -34,8 +34,19 @@ gum-engine deploys to [Railway](https://railway.com) as a single service next to
 6. **Fund the treasury** on each chain. On Monad every account keeps an unspendable 10 MON reserve, so
    fund signers and the treasury well above it.
 
-`railway.toml` already sets the rest: Dockerfile build, `healthcheckPath = "/healthz"`,
-`drainingSeconds = 30`, `numReplicas = 1`, and migrations in `preDeployCommand`.
+7. **Service settings.** Railway ignores `railway.toml` for newly created services, and its replacement
+   (`.railway/railway.ts`) has no keys for draining, overlap or restart policy. Set these on the service,
+   in the dashboard under Settings or with the `serviceInstanceUpdate` API mutation:
+
+   | Setting | Value | Why |
+   |---|---|---|
+   | Healthcheck path | `/healthz` | without one, Railway marks a crash-looping deploy as successful |
+   | Healthcheck timeout | `120` | |
+   | Draining seconds | `30` | the default is 0, an immediate SIGKILL with no graceful drain |
+   | Overlap seconds | `0` | |
+   | Restart policy | `ALWAYS` | the default gives up after 10 crashes |
+   | Replicas | `1` | one instance owns the signers |
+   | Region | same as Postgres, close to the KMS region | every send waits on one KMS call and one Postgres write |
 
 ## Deploys and restarts
 

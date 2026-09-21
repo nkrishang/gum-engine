@@ -12,7 +12,9 @@
 
 [database]
 url = "set-by-DATABASE_URL"
-auto_migrate = false           # migrations run in Railway's preDeployCommand
+auto_migrate = true            # the engine applies its own migrations at boot (idempotent; sqlx takes an
+                               # advisory lock, so overlapping instances are safe). Deliberately not a
+                               # platform pre-deploy step: that is config which can silently go missing.
 
 [webhook]
 signing_secret = "set-by-GUM_WEBHOOK__SIGNING_SECRET"

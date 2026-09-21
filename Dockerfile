@@ -27,5 +27,6 @@ COPY --from=builder /app/target/release/gum-engine /usr/local/bin/gum-engine
 COPY config ./config
 USER gum
 ENV GUM_CONFIG=/app/config/production.toml
-# SIGTERM starts a graceful drain; see railway.toml for the matching drainingSeconds.
+# SIGTERM starts a graceful drain; the Railway service's drainingSeconds (30) must stay above
+# server.drain_timeout_ms. See docs/deploying.md for the service settings.
 CMD ["gum-engine"]
