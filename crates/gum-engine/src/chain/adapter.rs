@@ -137,8 +137,9 @@ pub trait ChainAdapter: Send + Sync + 'static {
     /// What the mined transaction cost in fees, per this chain's charging rules.
     fn actual_cost(&self, gas_limit: u64, receipt: &Receipt) -> ActualCost;
 
-    /// The part of a confirmed balance that may actually be spent (chains may enforce a reserve).
-    fn spendable(&self, confirmed: U256) -> U256 {
+    /// The part of a confirmed balance that a transaction transferring `value` may draw on. Chains may
+    /// hold part of a balance back, and may do so only for transactions that move native value.
+    fn spendable(&self, confirmed: U256, _value: U256) -> U256 {
         confirmed
     }
 

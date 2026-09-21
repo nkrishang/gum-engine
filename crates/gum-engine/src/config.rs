@@ -200,6 +200,9 @@ pub struct ChainConfig {
     pub signer_min_balance: U256,
     #[serde(deserialize_with = "de_wei")]
     pub topup_amount: U256,
+    /// Amount of a signer's *first* top-up on this chain (its initial funding). Defaults to `topup_amount`.
+    #[serde(default, deserialize_with = "de_wei_opt")]
+    pub initial_topup_amount: Option<U256>,
     #[serde(deserialize_with = "de_wei")]
     pub treasury_min_balance: U256,
     /// Largest worst-case cost a single job may have. Defaults to `topup_amount`.
@@ -226,6 +229,10 @@ impl ChainConfig {
     /// Tunable overrides from this chain's block. Unknown keys are rejected.
     pub fn overrides(&self, name: &str) -> anyhow::Result<TunableOverrides> {
         TunableOverrides::deserialize(serde_json::Value::Object(self.tunables_raw.clone())).map_err(|e| anyhow::anyhow!("chain `{name}`: {e}"))
+    }
+
+    pub fn initial_topup_amount(&self) -> U256 {
+        self.initial_topup_amount.unwrap_or(self.topup_amount)
     }
 
     pub fn max_job_cost(&self) -> U256 {

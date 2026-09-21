@@ -34,26 +34,30 @@ chain_id = 143
 kind = "monad"
 rpc_url_env = "RPC_URL_MONAD"
 treasury_key_id = "replace-with-kms-key-id"
-# Monad enforces a 10 MON reserve per account; the engine already treats it as unspendable, so these
-# amounts are what a signer can actually use on top of it.
-signer_min_balance = "5000000000000000000"        # 5 MON spendable
-topup_amount = "25000000000000000000"             # 25 MON
-treasury_min_balance = "500000000000000000000"    # 500 MON
+# Funding policy. Each account's reserve on Monad is min(10 MON, its balance): a signer holding less than
+# 10 MON pays gas normally, but only balance ABOVE 10 MON can be transferred out as value. So the treasury's
+# last 10 MON cannot be handed out, and a job that transfers MON needs its signer to hold more than 10 MON.
+initial_topup_amount = "2500000000000000000"      # 2.5 MON: a signer's first funding
+signer_min_balance = "500000000000000000"         # below 0.5 MON a signer is topped up...
+topup_amount = "1000000000000000000"              # ...with 1 MON
+treasury_min_balance = "10000000000000000000"     # alert below 10 MON (also the point where it can no longer pay out)
 
 [chains.base]
 chain_id = 8453
 kind = "opstack"
 rpc_url_env = "RPC_URL_BASE"
 treasury_key_id = "replace-with-kms-key-id"
-signer_min_balance = "2000000000000000"           # 0.002 ETH
-topup_amount = "10000000000000000"                # 0.01 ETH
-treasury_min_balance = "200000000000000000"       # 0.2 ETH
+initial_topup_amount = "25000000000000000"        # 0.025 ETH: a signer's first funding
+signer_min_balance = "5000000000000000"           # below 0.005 ETH a signer is topped up...
+topup_amount = "10000000000000000"                # ...with 0.01 ETH
+treasury_min_balance = "100000000000000000"       # alert below 0.1 ETH
 
 [chains.arbitrum]
 chain_id = 42161
 kind = "arbitrum"
 rpc_url_env = "RPC_URL_ARBITRUM"
 treasury_key_id = "replace-with-kms-key-id"
-signer_min_balance = "2000000000000000"           # 0.002 ETH
-topup_amount = "10000000000000000"                # 0.01 ETH
-treasury_min_balance = "200000000000000000"       # 0.2 ETH
+initial_topup_amount = "25000000000000000"        # 0.025 ETH: a signer's first funding
+signer_min_balance = "5000000000000000"           # below 0.005 ETH a signer is topped up...
+topup_amount = "10000000000000000"                # ...with 0.01 ETH
+treasury_min_balance = "100000000000000000"       # alert below 0.1 ETH

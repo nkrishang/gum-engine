@@ -203,6 +203,8 @@ fn defaults_are_sane() {
         assert!(t.max_fee_multiplier_bps >= 10_000, "kind `{kind}`");
         assert!(t.stall_outage_ms >= t.stall_warn_ms, "kind `{kind}`");
         assert!(t.cancel_fee_cap_wei >= t.max_fee_cap_wei, "kind `{kind}`");
-        assert!(adapter.spendable(U256::from(5)) <= U256::from(5), "kind `{kind}`: spendable can never exceed the balance");
+        let five = U256::from(5);
+        assert!(adapter.spendable(five, U256::ZERO) <= five, "kind `{kind}`: spendable can never exceed the balance");
+        assert!(adapter.spendable(five, U256::from(1)) <= adapter.spendable(five, U256::ZERO), "kind `{kind}`: moving value can never unlock more than paying gas");
     });
 }

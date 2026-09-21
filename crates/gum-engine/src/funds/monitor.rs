@@ -95,7 +95,7 @@ pub async fn run(engine: Arc<Engine>, chain: Arc<ChainCtx>) {
                     }
                     let (engine, pair) = (engine.clone(), pair.clone());
                     tokio::spawn(async move {
-                        if treasury::request_topup(&engine, &pair, U256::ZERO).await.is_ok() && pair.view().current.is_none() {
+                        if treasury::request_topup(&engine, &pair, U256::ZERO, U256::ZERO).await.is_ok() && pair.view().current.is_none() {
                             pair.resume_if(&engine.store, PauseReason::InsufficientFunds);
                         }
                     });

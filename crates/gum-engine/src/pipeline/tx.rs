@@ -583,7 +583,7 @@ impl<'a> TxDriver<'a> {
             tokio::time::sleep(Duration::from_secs(15)).await;
             return Next::Rebroadcast;
         }
-        match treasury::request_topup(self.engine, self.pair, f.worst_case).await {
+        match treasury::request_topup(self.engine, self.pair, f.worst_case, f.intent.value).await {
             Ok(()) => {
                 self.pair.resume_if(&self.engine.store, PauseReason::InsufficientFunds);
                 Next::Rebroadcast
@@ -641,7 +641,7 @@ impl<'a> TxDriver<'a> {
                 }
                 // Our turn on-chain, so it is either funds or fees.
                 if let Ok(balance) = chain.rpc.get_balance(self.pair.key.signer, chain.rpc.read_opts()).await {
-                    if chain.adapter.spendable(balance) < f.worst_case {
+                    if chain.adapter.spendable(balance, f.intent.value) < f.worst_case {
                         return self.fund_and_retry(f).await;
                     }
                 }

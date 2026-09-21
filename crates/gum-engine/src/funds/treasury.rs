@@ -24,24 +24,34 @@ pub struct TopupRequest {
     pub signer: Address,
     /// Spendable balance the signer must end up with, at least.
     pub needed: U256,
+    /// Native value the signer's pending transaction transfers (zero for a plain call). Some chains
+    /// only let value come out of part of a balance, which changes how much counts as spendable.
+    pub value: U256,
     pub reply: oneshot::Sender<Result<(), String>>,
 }
 
-/// What a signer has available to spend right now, per its ledger and the chain's rules.
-pub fn spendable(pair: &Pair) -> U256 {
+/// What `pair` can put towards a transaction transferring `value`, per its ledger and the chain's rules.
+pub fn spendable_for(pair: &Pair, value: U256) -> U256 {
     pair.ledger.mature();
     let view = pair.ledger.view();
-    pair.chain.adapter.spendable(view.confirmed).saturating_sub(view.reserved)
+    pair.chain.adapter.spendable(view.confirmed, value).saturating_sub(view.reserved)
+}
+
+/// Headline availability of a pair for the work it typically does: a treasury only ever transfers
+/// value, a signer is judged by what it can spend on gas.
+pub fn spendable(pair: &Pair) -> U256 {
+    let typical_value = if pair.role == crate::domain::PairRole::Treasury { U256::from(1) } else { U256::ZERO };
+    spendable_for(pair, typical_value)
 }
 
 /// Asks the chain's treasury to fund `pair` so it can spend `needed` and still sit above its floor.
 /// Returns once the funds are spendable, or with the reason they are not coming.
-pub async fn request_topup(engine: &Arc<Engine>, pair: &Arc<Pair>, needed: U256) -> Result<(), String> {
+pub async fn request_topup(engine: &Arc<Engine>, pair: &Arc<Pair>, needed: U256, value: U256) -> Result<(), String> {
     let chain = &pair.chain;
     let treasury = engine.treasury(chain.chain_id).ok_or_else(|| "no treasury is running for this chain".to_string())?;
     let (reply, done) = oneshot::channel();
     let target = needed.saturating_add(chain.cfg.signer_min_balance);
-    treasury.requests.send(TopupRequest { signer: pair.key.signer, needed: target, reply }).await.map_err(|_| "treasury worker has stopped".to_string())?;
+    treasury.requests.send(TopupRequest { signer: pair.key.signer, needed: target, value, reply }).await.map_err(|_| "treasury worker has stopped".to_string())?;
 
     let wait = Duration::from_millis(chain.tunables.topup_wait_timeout_ms);
     match tokio::time::timeout(wait, done).await {
@@ -55,7 +65,7 @@ pub async fn request_topup(engine: &Arc<Engine>, pair: &Arc<Pair>, needed: U256)
     if !maturity.is_zero() {
         tokio::time::sleep(maturity + Duration::from_millis(50)).await;
     }
-    if spendable(pair) >= needed {
+    if spendable_for(pair, value) >= needed {
         Ok(())
     } else {
         Err("top-up arrived but the signer still cannot cover the transaction".into())
@@ -98,11 +108,14 @@ async fn fund(engine: &Arc<Engine>, treasury: &Arc<Pair>, request: &TopupRequest
     let target = engine.pair(&PairKey { chain_id: chain.chain_id, signer: request.signer }).ok_or_else(|| "unknown signer".to_string())?;
 
     // Requests queue up while one is being served; an earlier one may already have covered this signer.
-    let have = spendable(&target).saturating_add(target.ledger.maturing());
+    let have = spendable_for(&target, request.value).saturating_add(target.ledger.maturing());
     if have >= request.needed {
         return Ok(());
     }
-    let amount = chain.cfg.topup_amount.max(request.needed.saturating_sub(have));
+    // A signer's first funding on a chain may be larger than the routine top-up that follows.
+    let first_funding = !engine.store.ever_topped_up(chain.chain_id, &request.signer).await.map_err(|e| format!("store: {e}"))?;
+    let base = if first_funding { chain.cfg.initial_topup_amount() } else { chain.cfg.topup_amount };
+    let amount = base.max(request.needed.saturating_sub(have));
 
     let sent_recently = engine.store.recent_topups(chain.chain_id, &request.signer).await.map_err(|e| format!("store: {e}"))?;
     if sent_recently >= chain.cfg.max_topups_per_signer_per_hour {

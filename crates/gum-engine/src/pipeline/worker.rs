@@ -225,7 +225,8 @@ async fn process(engine: &Arc<Engine>, pair: &Arc<Pair>, job: &QueuedJob) -> Dis
 /// When the treasury cannot help, the pair pauses and the (still unbound) job goes back to the front.
 async fn ensure_funds(engine: &Arc<Engine>, pair: &Arc<Pair>, job: &QueuedJob, cost: U256) -> Result<(), Disposition> {
     let chain = &pair.chain;
-    let available = treasury::spendable(pair);
+    let value = job.request.value;
+    let available = treasury::spendable_for(pair, value);
     if available >= cost && available >= chain.cfg.signer_min_balance {
         return Ok(());
     }
@@ -235,7 +236,7 @@ async fn ensure_funds(engine: &Arc<Engine>, pair: &Arc<Pair>, job: &QueuedJob, c
         RecoveryStep::AwaitingTreasuryTopup,
         format!("available {available} wei; needs {cost} wei and a floor of {} wei", chain.cfg.signer_min_balance),
     );
-    match treasury::request_topup(engine, pair, cost).await {
+    match treasury::request_topup(engine, pair, cost, value).await {
         Ok(()) => {
             pair.resume_if(&engine.store, PauseReason::InsufficientFunds);
             Ok(())

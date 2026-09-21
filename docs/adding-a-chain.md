@@ -11,7 +11,7 @@ they start to.
 |---|---|---|
 | `opstack` | Base, Optimism, Unichain, any OP Stack rollup | geth-style pool; L1 data fee charged on top (`l1Fee` in receipts) |
 | `arbitrum` | Arbitrum One, Orbit chains | no pool, no replacement; L1 cost inside the gas limit; tips ignored |
-| `monad` | Monad | charged on the gas *limit*; 10 MON reserve; accepts-then-drops; `finalized` tag confirmation |
+| `monad` | Monad | charged on the gas *limit*; value can only leave the balance held above a 10 MON reserve; accepts-then-drops; `finalized` tag confirmation |
 | `geth` | vanilla EIP-1559 chains, local Anvil | geth-style pool, +10% replacement rule |
 
 Add a block to the config and an env var for the endpoint. No code, no rebuild of anything but config:

@@ -31,9 +31,14 @@ built from the `Dockerfile` in the repo root. The engine applies its own databas
      through a private relay, and has no fallback if the relay drops a transaction.
    - Confirm the Arbitrum endpoint has the "Synchronous SendTransaction" add-on. Without it the engine
      falls back to send-and-poll, which costs about three times the RPC calls, and raises an alert at boot.
-6. **Fund the treasury** on each chain. On Monad every account keeps an unspendable 10 MON reserve, so
-   fund signers and the treasury well above it.
+6. **Fund the treasury** on each chain. Signers are never funded by hand: the treasury gives each one
+   `initial_topup_amount` the first time, then `topup_amount` whenever it falls below
+   `signer_min_balance`, and alerts when its own balance drops under `treasury_min_balance`.
 
+   Monad needs care. Each account's reserve is `min(10 MON, its balance)`: a signer holding less than
+   10 MON pays gas normally, but only balance *above* 10 MON can leave an account as value. So the
+   treasury's last 10 MON can never be handed out, and a job that transfers MON needs its signer to hold
+   more than 10 MON. Fees are also charged on the gas *limit*, so they are far larger than on the L2s.
 7. **Service settings.** Railway ignores `railway.toml` for newly created services, and its replacement
    (`.railway/railway.ts`) has no keys for draining, overlap or restart policy. Set these on the service,
    in the dashboard under Settings or with the `serviceInstanceUpdate` API mutation:

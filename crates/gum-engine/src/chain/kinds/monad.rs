@@ -1,8 +1,12 @@
 //! Monad.
 //!
 //! - **Charged on the gas limit, not gas used**: `fee = gas_limit * price`. Padding a limit costs money.
-//! - **10 MON reserve balance**: spending into it makes the transaction revert at execution while still
-//!   being charged, so the reserve is excluded from what the ledger considers spendable.
+//! - **Reserve balance**: each account's reserve is `min(10 MON, its balance)`. Gas is checked against
+//!   it as a budget for the transactions in flight, so an account holding less than 10 MON transacts
+//!   normally as long as it only pays gas. A transaction that *transfers value* reverts (and is still
+//!   charged) if it would leave the balance below the reserve — so value can only come out of what an
+//!   account holds above 10 MON. (The protocol exempts an account's first transaction in k blocks; a
+//!   busy signer cannot rely on that.)
 //! - Credits become spendable only after the delayed-execution window (k = 3 blocks).
 //! - Nodes accept transactions with nonce gaps or insufficient balance and drop them later, so an
 //!   accepted send proves nothing and a rejection string is never proof of non-execution.
@@ -64,8 +68,12 @@ impl ChainAdapter for Monad {
         ActualCost { fee_paid: U256::from(gas_limit).saturating_mul(price), l1_fee: None }
     }
 
-    fn spendable(&self, confirmed: U256) -> U256 {
-        confirmed.saturating_sub(U256::from(RESERVE_WEI))
+    fn spendable(&self, confirmed: U256, value: U256) -> U256 {
+        if value.is_zero() {
+            confirmed
+        } else {
+            confirmed.saturating_sub(U256::from(RESERVE_WEI))
+        }
     }
 
     fn credit_maturity_blocks(&self) -> u64 {
@@ -127,5 +135,32 @@ impl ChainAdapter for Monad {
 
     fn transfer_gas(&self) -> GasPlan {
         GasPlan::Fixed(21_000)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn mon(n: u64) -> U256 {
+        U256::from(n) * U256::from(1_000_000_000_000_000_000u128)
+    }
+
+    #[test]
+    fn small_accounts_can_pay_gas_but_cannot_move_value() {
+        let m = Monad;
+        // 2.5 MON signer making a contract call: the whole balance is usable for gas.
+        let balance = mon(5) / U256::from(2);
+        assert_eq!(m.spendable(balance, U256::ZERO), balance);
+        // The same signer cannot transfer value: that would dip into its reserve and revert.
+        assert_eq!(m.spendable(balance, U256::from(1)), U256::ZERO);
+    }
+
+    #[test]
+    fn value_comes_only_from_what_is_held_above_the_reserve() {
+        let m = Monad;
+        // A 50 MON treasury can hand out 40 MON; the last 10 stay put.
+        assert_eq!(m.spendable(mon(50), mon(1)), mon(40));
+        assert_eq!(m.spendable(mon(10), mon(1)), U256::ZERO);
     }
 }

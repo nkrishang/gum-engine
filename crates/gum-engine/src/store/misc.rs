@@ -208,6 +208,16 @@ impl Store {
         .transpose()
     }
 
+    /// Whether `signer` was ever topped up on this chain (failed attempts do not count).
+    pub async fn ever_topped_up(&self, chain_id: u64, signer: &Address) -> Result<bool, StoreError> {
+        let found: Option<Uuid> = sqlx::query_scalar("SELECT id FROM topups WHERE chain_id = $1 AND signer = $2 AND status <> 'failed' LIMIT 1")
+            .bind(chain_id as i64)
+            .bind(addr_hex(signer))
+            .fetch_optional(&self.pipeline)
+            .await?;
+        Ok(found.is_some())
+    }
+
     /// Top-ups sent to `signer` within the last hour; a guard against a draining loop.
     pub async fn recent_topups(&self, chain_id: u64, signer: &Address) -> Result<u32, StoreError> {
         let n: i64 = sqlx::query_scalar("SELECT count(*) FROM topups WHERE chain_id = $1 AND signer = $2 AND status <> 'failed' AND created_at > now() - interval '1 hour'")
