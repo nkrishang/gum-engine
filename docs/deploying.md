@@ -9,13 +9,16 @@ built from the `Dockerfile` in the repo root. The engine applies its own databas
    Use the private `DATABASE_URL`. Do not put PgBouncer in front of it: the leader lease is a
    session-level advisory lock, which transaction pooling breaks.
 2. **No public domain.** The API has no authentication. Do not generate a domain or enable a TCP proxy.
-   Callers reach the service at `http://<service>.railway.internal:$PORT`.
+   Callers reach the service at `http://<service>.railway.internal:$PORT`. Railway private networking is
+   scoped to one project and environment, so gum-engine, gum-indexer and gum-server are services of the
+   **same** Railway project (`gum`), each deployed from its own repo, all in one region.
 3. **Variables** (seal all of them):
 
    | Variable | Value |
    |---|---|
    | `DATABASE_URL` | Railway Postgres, private network URL |
    | `GUM_WEBHOOK__SIGNING_SECRET` | HMAC secret for webhook signatures |
+   | `GUM_WEBHOOK__HOST_ALLOWLIST` | `["gum-server.railway.internal"]` — the only host webhooks may go to |
    | `GUM_SIGNERS__KMS_KEY_IDS` | JSON array of KMS key ids or ARNs, e.g. `["1234abcd-…","…"]` |
    | `GUM_CHAINS__MONAD__TREASURY_KEY_ID`, `…__BASE__…`, `…__ARBITRUM__…` | KMS key id of each chain's treasury (one key may serve all chains) |
    | `RPC_URL_MONAD`, `RPC_URL_BASE`, `RPC_URL_ARBITRUM` | QuickNode endpoint URLs |
