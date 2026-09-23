@@ -37,14 +37,14 @@ treasury_key_id = "replace-with-kms-key-id"
 # Funding policy. Each account's reserve on Monad is min(10 MON, its balance): a signer holding less than
 # 10 MON pays gas normally, but only balance ABOVE 10 MON can be transferred out as value. So the treasury's
 # last 10 MON cannot be handed out, and a job that transfers MON needs its signer to hold more than 10 MON.
-# Sized for the pool running flat out (offered load exceeds capacity): ~1-2 settlements/s per signer at
-# ~0.045 MON each, ~160-320 MON/hour per signer. A signer pauses while a top-up lands, so each top-up should
-# last a while: 100 MON is ~2,200 settlements, ~20-40 min per signer.
-initial_topup_amount = "100000000000000000000"    # 100 MON: a signer's first funding
-signer_min_balance = "5000000000000000000"        # below 5 MON a signer is topped up...
-topup_amount = "100000000000000000000"            # ...with 100 MON
-treasury_min_balance = "5000000000000000000000"   # alert below 5,000 MON (~1.5-3h of burn for 10 busy signers); only the last 10 MON cannot be paid out
-# A busy signer needs ~2-4 top-ups/hour; 30 leaves headroom and caps a drained signer at 3,000 MON/hour.
+# Sized for a ~1,000 MON test budget. Settlements cost ~0.045 MON each; a busy signer does ~1-2/s
+# (~160-320 MON/hour). Top-ups are kept small so the ten first fundings take 200 MON, not the whole budget,
+# and the rest stays in the treasury to follow demand. 20 MON is ~450 settlements, ~4-7 min per busy signer.
+initial_topup_amount = "20000000000000000000"     # 20 MON: a signer's first funding
+signer_min_balance = "2000000000000000000"        # below 2 MON a signer is topped up...
+topup_amount = "20000000000000000000"             # ...with 20 MON
+treasury_min_balance = "200000000000000000000"    # alert below 200 MON (~20% of the budget); only the last 10 MON cannot be paid out
+# A busy signer needs ~8-16 top-ups/hour; 30 leaves headroom and caps a drained signer at 600 MON/hour.
 max_topups_per_signer_per_hour = 30
 
 [chains.base]
