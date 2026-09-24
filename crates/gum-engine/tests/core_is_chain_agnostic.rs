@@ -21,6 +21,7 @@ const FORBIDDEN: &[(&str, &str)] = &[
     ("\"opstack\"", "kind string in core code"),
     ("\"arbitrum\"", "kind string in core code"),
     ("\"geth\"", "kind string in core code"),
+    ("\"arc\"", "kind string in core code"),
     ("31337", "hard-coded chain id"),
     ("8453", "hard-coded chain id"),
     ("42161", "hard-coded chain id"),

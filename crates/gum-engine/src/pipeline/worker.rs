@@ -124,16 +124,16 @@ async fn process(engine: &Arc<Engine>, pair: &Arc<Pair>, job: &QueuedJob) -> Dis
         Some(g) => g,
         None => match chain.rpc.estimate_gas(pair.key.signer, req.to, &req.data, req.value, chain.rpc.read_opts()).await {
             Ok(g) => (g.saturating_mul(chain.tunables.estimate_multiplier_bps as u64) / 10_000).min(chain.tunables.max_tx_gas),
-            Err(RpcError::Response { message, data, .. }) if !message.to_lowercase().contains("insufficient funds") => {
-                let revert = data.as_deref().and_then(|d| hex::decode(d.trim_matches('"').trim_start_matches("0x")).ok());
-                return fail_unbound(engine, pair, job, JobFailure::SimulationReverted, &format!("gas estimation failed: {message}"), revert.as_deref()).await;
-            }
-            Err(RpcError::Response { .. }) => {
+            Err(e) if chain.adapter.estimate_lacks_funds(&e) => {
                 // The estimate tripped over the signer's balance, not the call: fund the signer and retry.
                 return match ensure_funds(engine, pair, job, req.value).await {
                     Ok(()) => Disposition::Requeue { after_bind: false, backoff: Duration::ZERO },
                     Err(d) => d,
                 };
+            }
+            Err(RpcError::Response { message, data, .. }) => {
+                let revert = data.as_deref().and_then(|d| hex::decode(d.trim_matches('"').trim_start_matches("0x")).ok());
+                return fail_unbound(engine, pair, job, JobFailure::SimulationReverted, &format!("gas estimation failed: {message}"), revert.as_deref()).await;
             }
             Err(e) => {
                 if let Some(suppressed) = telemetry::throttled(&format!("worker.estimate:{}", chain.chain_id), Duration::from_secs(10)) {

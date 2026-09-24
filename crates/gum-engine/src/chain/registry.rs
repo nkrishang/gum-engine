@@ -10,11 +10,12 @@ pub fn adapter_for(kind: &str) -> Option<Arc<dyn ChainAdapter>> {
         "opstack" => Arc::new(kinds::opstack::OpStack),
         "arbitrum" => Arc::new(kinds::arbitrum::Arbitrum),
         "monad" => Arc::new(kinds::monad::Monad),
+        "arc" => Arc::new(kinds::arc::ArcNetwork),
         _ => return None,
     };
     Some(adapter)
 }
 
 pub fn known_kinds() -> &'static [&'static str] {
-    &["geth", "opstack", "arbitrum", "monad"]
+    &["geth", "opstack", "arbitrum", "monad", "arc"]
 }

@@ -164,6 +164,14 @@ pub trait ChainAdapter: Send + Sync + 'static {
 
     fn classify_send_error(&self, err: &RpcError) -> SendErrorClass;
 
+    /// Whether a failed `eth_estimateGas` means the sender cannot cover the call's `value`, rather than that
+    /// the call itself reverts. True sends the job to the treasury for funds; false fails it as a revert.
+    /// Matches the message only, as the worker always has: revert data is ABI bytes, and a decoded revert
+    /// can legitimately mention funds without the sender lacking them.
+    fn estimate_lacks_funds(&self, err: &RpcError) -> bool {
+        matches!(err, RpcError::Response { message, .. } if message.to_lowercase().contains("insufficient funds"))
+    }
+
     /// Escalation steps for a transaction that is not getting mined, in order.
     fn stuck_ladder(&self) -> &'static [StuckStep];
 
