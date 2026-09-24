@@ -75,8 +75,8 @@ treasury_key_id = "replace-with-kms-key-id"
 # Funding policy. Gas is paid in USDC, which has 18 decimals natively (the ERC-20 view at 0x3600…0000 has 6),
 # so the amounts below are 18-decimal units: 1 USDC = 1000000000000000000. The treasury can be the same KMS
 # key as on the other chains (same address, its own nonce and balance here); the job signers join Arc
-# automatically. No public Arc endpoint offers eth_sendRawTransactionSync, so the engine sends asynchronously
-# and polls receipts (~3x the RPC calls per transaction).
+# automatically. The QuickNode endpoint offers eth_sendRawTransactionSync (Arc's free public endpoints do not;
+# on one of those the engine falls back to send + receipt polling at ~3x the RPC calls, and alerts at boot).
 # Sized for a ~5 USDC test budget across 10 signers. A settlement costs ~0.002 USDC at the 20 gwei base-fee
 # floor, so 0.3 USDC is ~150 settlements. The ten first fundings take 3 USDC and the rest stays in the treasury
 # to follow demand. max_job_cost defaults to topup_amount: a job whose value plus worst-case gas exceeds
