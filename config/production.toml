@@ -67,22 +67,21 @@ signer_min_balance = "5000000000000000"           # below 0.005 ETH a signer is 
 topup_amount = "10000000000000000"                # ...with 0.01 ETH
 treasury_min_balance = "100000000000000000"       # alert below 0.1 ETH
 
-# Arc (Circle). Uncomment once RPC_URL_ARC and GUM_CHAINS__ARC__TREASURY_KEY_ID are set in Railway and the
-# treasury holds USDC. It stays commented until then because a chain without its RPC URL is a boot error.
-# The treasury can be the same KMS key as on the other chains (same address, its own nonce and balance on Arc);
-# the job signers in GUM_SIGNERS__KMS_KEY_IDS join Arc automatically.
-# Gas is paid in USDC, which has 18 decimals natively (the ERC-20 view at 0x3600…0000 has 6): the amounts below
-# are 18-decimal units, so 1 USDC = 1000000000000000000. No public Arc endpoint offers
-# eth_sendRawTransactionSync, so the engine sends asynchronously and polls receipts (~3x the RPC calls).
-# A settlement costs ~0.002 USDC at the 20 gwei floor, so 5 USDC is ~2,500 settlements per top-up.
-# max_job_cost defaults to topup_amount: a job moving more than ~5 USDC of value needs max_job_cost raised,
-# and a topup_amount to match.
-# [chains.arc]
-# chain_id = 5042
-# kind = "arc"
-# rpc_url_env = "RPC_URL_ARC"
-# treasury_key_id = "replace-with-kms-key-id"
-# initial_topup_amount = "5000000000000000000"      # 5 USDC: a signer's first funding
-# signer_min_balance = "1000000000000000000"        # below 1 USDC a signer is topped up...
-# topup_amount = "5000000000000000000"              # ...with 5 USDC
-# treasury_min_balance = "50000000000000000000"     # alert below 50 USDC
+[chains.arc]
+chain_id = 5042
+kind = "arc"
+rpc_url_env = "RPC_URL_ARC"
+treasury_key_id = "replace-with-kms-key-id"
+# Funding policy. Gas is paid in USDC, which has 18 decimals natively (the ERC-20 view at 0x3600…0000 has 6),
+# so the amounts below are 18-decimal units: 1 USDC = 1000000000000000000. The treasury can be the same KMS
+# key as on the other chains (same address, its own nonce and balance here); the job signers join Arc
+# automatically. No public Arc endpoint offers eth_sendRawTransactionSync, so the engine sends asynchronously
+# and polls receipts (~3x the RPC calls per transaction).
+# Sized for a ~5 USDC test budget across 10 signers. A settlement costs ~0.002 USDC at the 20 gwei base-fee
+# floor, so 0.3 USDC is ~150 settlements. The ten first fundings take 3 USDC and the rest stays in the treasury
+# to follow demand. max_job_cost defaults to topup_amount: a job whose value plus worst-case gas exceeds
+# 0.2 USDC is refused until these are raised.
+initial_topup_amount = "300000000000000000"       # 0.3 USDC: a signer's first funding
+signer_min_balance = "50000000000000000"          # below 0.05 USDC a signer is topped up...
+topup_amount = "200000000000000000"               # ...with 0.2 USDC
+treasury_min_balance = "1000000000000000000"      # alert below 1 USDC (~20% of the budget)

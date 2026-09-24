@@ -20,8 +20,8 @@ built from the `Dockerfile` in the repo root. The engine applies its own databas
    | `GUM_WEBHOOK__SIGNING_SECRET` | HMAC secret for webhook signatures |
    | `GUM_WEBHOOK__HOST_ALLOWLIST` | `["gum-server.railway.internal"]` — the only host webhooks may go to |
    | `GUM_SIGNERS__KMS_KEY_IDS` | JSON array of KMS key ids or ARNs, e.g. `["1234abcd-…","…"]` |
-   | `GUM_CHAINS__MONAD__TREASURY_KEY_ID`, `…__BASE__…`, `…__ARBITRUM__…` | KMS key id of each chain's treasury (one key may serve all chains) |
-   | `RPC_URL_MONAD`, `RPC_URL_BASE`, `RPC_URL_ARBITRUM` | QuickNode endpoint URLs |
+   | `GUM_CHAINS__MONAD__TREASURY_KEY_ID`, `…__BASE__…`, `…__ARBITRUM__…`, `…__ARC__…` | KMS key id of each chain's treasury (one key may serve all chains) |
+   | `RPC_URL_MONAD`, `RPC_URL_BASE`, `RPC_URL_ARBITRUM`, `RPC_URL_ARC` | QuickNode endpoint URLs |
    | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION` | IAM user for KMS |
 
    Every `GUM_*` variable is parsed as a config override (`__` separates nesting), and an unknown one is
