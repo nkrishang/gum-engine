@@ -1,0 +1,50 @@
+[
+  {
+    "note": "Arc mainnet: plain USDC transfer, exactly 21000 gas (legacy tx, so max fee = gas price)",
+    "gas_limit": 21000,
+    "max_fee_per_gas": "25125000000",
+    "value": "4661934109498",
+    "receipt": {
+      "transactionHash": "0x826e27b4bb27ed536829f20a2bdae63c5bcd8c810c602897af59a11278a405c0",
+      "blockNumber": "0x1570462",
+      "blockHash": "0xdf81c56ff934c1be0e52d5b4dcc114e623f0c7001726b85103f35a0a7b5f2642",
+      "status": "0x1",
+      "gasUsed": "0x5208",
+      "effectiveGasPrice": "0x5d9911340",
+      "type": "0x0"
+    },
+    "expect_fee_paid": "527625000000000"
+  },
+  {
+    "note": "Arc mainnet: contract call charged on gas used, not on its 568653 limit",
+    "gas_limit": 568653,
+    "max_fee_per_gas": "40000000000",
+    "value": "0",
+    "receipt": {
+      "transactionHash": "0x8525b88bd410f61876210d57e27278e6c6e544747b1ac37e3d9c2737aa3b288b",
+      "blockNumber": "0x1570471",
+      "blockHash": "0x38731f13a845f4fe390318529dd7d6bdce06ffdc0d65c203abd001ea60a51bf0",
+      "status": "0x1",
+      "gasUsed": "0x54da3",
+      "effectiveGasPrice": "0x9502f9000",
+      "type": "0x0"
+    },
+    "expect_fee_paid": "13902200000000000"
+  },
+  {
+    "note": "Arc mainnet: reverted EIP-1559 call still pays gas used times the effective price",
+    "gas_limit": 344901,
+    "max_fee_per_gas": "220438347907",
+    "value": "0",
+    "receipt": {
+      "transactionHash": "0x1bc732dc3c72faff7ee8c3694d2588f1a485ac1f4dce2b6c2e7bf3539dd1698f",
+      "blockNumber": "0x1570468",
+      "blockHash": "0xb1e93e85c429cea3ac79491d8808733509a21f39aca65093de8cf65b1458fb09",
+      "status": "0x0",
+      "gasUsed": "0x8863",
+      "effectiveGasPrice": "0x2eab0e7883",
+      "type": "0x2"
+    },
+    "expect_fee_paid": "6998304917172905"
+  }
+]

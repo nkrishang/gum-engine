@@ -1,0 +1,86 @@
+[
+  {
+    "code": -32003,
+    "message": "nonce too low: next nonce 12, tx nonce 11",
+    "class": "NonceTooLow",
+    "note": "Arc mainnet, 2026-09-24 (the nonce numbers vary)"
+  },
+  {
+    "code": -32003,
+    "message": "insufficient funds for gas * price + value: have 0 want 2100000000000001",
+    "class": "InsufficientFunds",
+    "note": "Arc testnet and mainnet, 2026-09-24; Reth checks the balance before the fee cap and the nonce gap"
+  },
+  {
+    "code": -32000,
+    "message": "replacement transaction underpriced",
+    "class": "FeeTooLow",
+    "note": "Arc testnet, 2026-09-24"
+  },
+  {
+    "code": -32000,
+    "message": "intrinsic gas too low",
+    "class": "Deterministic",
+    "note": "Arc testnet and mainnet, 2026-09-24"
+  },
+  {
+    "code": -32000,
+    "message": "exceeds block gas limit",
+    "class": "Deterministic",
+    "note": "Arc testnet and mainnet, 2026-09-24 (block gas limit 30M)"
+  },
+  {
+    "code": -32003,
+    "message": "gas limit too high",
+    "class": "Deterministic",
+    "note": "Arc mainnet, 2026-09-24: EIP-7825 per-transaction cap, 16777217 rejected"
+  },
+  {
+    "code": -32003,
+    "message": "max priority fee per gas higher than max fee per gas",
+    "class": "Deterministic",
+    "note": "Arc testnet and mainnet, 2026-09-24"
+  },
+  {
+    "code": -32000,
+    "message": "invalid chain ID",
+    "class": "Deterministic",
+    "note": "Arc testnet, 2026-09-24"
+  },
+  {
+    "code": -32000,
+    "message": "Blocked address",
+    "class": "Deterministic",
+    "note": "Arc testnet, 2026-09-24: USDC blocklist; the sender always, the recipient when value > 0"
+  },
+  {
+    "code": -32000,
+    "message": "Address 0x70997970c51812dc3a010c7d01b50e0d17dc79c8 is denylisted",
+    "class": "Deterministic",
+    "note": "circlefin/arc-node v0.8.0 source: pool-admission denylist check (not yet observed live)"
+  },
+  {
+    "code": -32000,
+    "message": "Transaction in invalid tx list",
+    "class": "FeeTooLow",
+    "note": "circlefin/arc-node v0.8.0 source: these bytes were evicted after a block-builder crash; a re-signed replacement goes through (not yet observed live)"
+  },
+  {
+    "code": -32010,
+    "message": "all transaction relay upstreams are unreachable",
+    "class": "PoolBusy",
+    "note": "circlefin/arc-node v0.8.0 source: the RPC node could not forward; resend the same bytes (not yet observed live)"
+  },
+  {
+    "code": -32000,
+    "message": "gapped-nonce tx from delegated accounts",
+    "class": "Indeterminate",
+    "note": "Arc testnet, 2026-09-24: only EIP-7702-delegated senders, which signers never are"
+  },
+  {
+    "code": -32602,
+    "message": "failed to decode signed transaction",
+    "class": "Indeterminate",
+    "note": "Arc testnet, 2026-09-24: the engine never produces undecodable bytes, so this is not a verdict on the job"
+  }
+]

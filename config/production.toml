@@ -3,7 +3,7 @@
 #                                      the leader lease is a session-level advisory lock)
 #   GUM_WEBHOOK__SIGNING_SECRET        HMAC secret for webhook signatures
 #   GUM_SIGNERS__KMS_KEY_IDS           JSON array of KMS key ids/ARNs, e.g. '["1234abcd-…","…"]' (never aliases)
-#   RPC_URL_MONAD / RPC_URL_BASE / RPC_URL_ARBITRUM   QuickNode endpoint URLs. Deliberately NOT prefixed with
+#   RPC_URL_MONAD / RPC_URL_BASE / RPC_URL_ARBITRUM / RPC_URL_ARC   QuickNode endpoint URLs. Deliberately NOT prefixed with
 #                                      GUM_: every GUM_* variable is parsed as a config override, and an
 #                                      unknown one is a boot error.
 #   GUM_CHAINS__<NAME>__TREASURY_KEY_ID  KMS key id of each chain's treasury
@@ -66,3 +66,21 @@ initial_topup_amount = "25000000000000000"        # 0.025 ETH: a signer's first 
 signer_min_balance = "5000000000000000"           # below 0.005 ETH a signer is topped up...
 topup_amount = "10000000000000000"                # ...with 0.01 ETH
 treasury_min_balance = "100000000000000000"       # alert below 0.1 ETH
+
+# Arc (Circle). Uncomment once RPC_URL_ARC and GUM_CHAINS__ARC__TREASURY_KEY_ID are set in Railway and the
+# treasury holds USDC. It stays commented until then because a chain without its RPC URL is a boot error.
+# Gas is paid in USDC, which has 18 decimals natively (the ERC-20 view at 0x3600…0000 has 6): the amounts below
+# are 18-decimal units, so 1 USDC = 1000000000000000000. No public Arc endpoint offers
+# eth_sendRawTransactionSync, so the engine sends asynchronously and polls receipts (~3x the RPC calls).
+# A settlement costs ~0.002 USDC at the 20 gwei floor, so 5 USDC is ~2,500 settlements per top-up.
+# max_job_cost defaults to topup_amount: a job moving more than ~5 USDC of value needs max_job_cost raised,
+# and a topup_amount to match.
+# [chains.arc]
+# chain_id = 5042
+# kind = "arc"
+# rpc_url_env = "RPC_URL_ARC"
+# treasury_key_id = "replace-with-kms-key-id"
+# initial_topup_amount = "5000000000000000000"      # 5 USDC: a signer's first funding
+# signer_min_balance = "1000000000000000000"        # below 1 USDC a signer is topped up...
+# topup_amount = "5000000000000000000"              # ...with 5 USDC
+# treasury_min_balance = "50000000000000000000"     # alert below 50 USDC

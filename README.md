@@ -4,10 +4,10 @@ A transaction relayer for EVM chains, written in Rust. You `POST` an unsigned tr
 job id back immediately. A pool of signers broadcasts jobs concurrently, the engine tracks each one to a
 receipt, and your webhook is told the result.
 
-Supports Monad, Base and Arbitrum One, plus Anvil for local development.
+Supports Monad, Base, Arbitrum One and Arc, plus Anvil for local development.
 
 > **Status:** passes its full benchmark and fault-injection suite on Anvil. It has not yet been run
-> against Monad, Base or Arbitrum, or against real AWS KMS keys. See [Status](#status).
+> against Monad, Base, Arbitrum or Arc, or against real AWS KMS keys. See [Status](#status).
 
 ## Quickstart
 
@@ -93,7 +93,7 @@ POST /v1/transactions ─► Postgres (durable) ─► per-chain queue
 | **Railway** | Dockerfile deploy on a private network, with no public domain since the API has no auth. The engine runs its own migrations at boot. |
 
 Chain-specific behaviour lives behind one trait, `ChainAdapter`. Adding a chain of a supported kind
-(OP Stack, Arbitrum Orbit, any standard EIP-1559 chain) is a config block. A new kind is one file plus
+(OP Stack, Arbitrum Orbit, Arc, any standard EIP-1559 chain) is a config block. A new kind is one file plus
 recorded fixtures. See [`docs/adding-a-chain.md`](docs/adding-a-chain.md).
 
 ## Tests and benchmarks
@@ -140,6 +140,8 @@ Not yet verified:
 - No run against Monad, Base or Arbitrum, and none with real KMS keys. Those adapters pass the
   conformance suite against fixtures assembled from chain docs and client source, not payloads captured
   from live nodes. A testnet run is the next step.
+- Arc's fixtures are payloads captured from Arc mainnet and testnet. The engine has booted against Arc
+  mainnet with unfunded keys, but no transaction has been sent there yet.
 - A Postgres restart under load has not been tested.
 
 ## Repository layout

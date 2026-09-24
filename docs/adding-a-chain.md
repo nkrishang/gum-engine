@@ -12,6 +12,7 @@ they start to.
 | `opstack` | Base, Optimism, Unichain, any OP Stack rollup | geth-style pool; L1 data fee charged on top (`l1Fee` in receipts) |
 | `arbitrum` | Arbitrum One, Orbit chains | no pool, no replacement; L1 cost inside the gas limit; tips ignored |
 | `monad` | Monad | charged on the gas *limit*; value can only leave the balance held above a 10 MON reserve; accepts-then-drops; `finalized` tag confirmation |
+| `arc` | Arc (Circle) | final on inclusion; USDC gas (18 decimals natively); 20 gwei base-fee floor, below which sends are accepted and never mined; compliance rejects; 2^24 per-tx gas cap |
 | `geth` | vanilla EIP-1559 chains, local Anvil | geth-style pool, +10% replacement rule |
 
 Add a block to the config and an env var for the endpoint. No code, no rebuild of anything but config:
@@ -34,6 +35,9 @@ treasury_min_balance = "200000000000000000"
 At boot the engine verifies `eth_chainId` against `chain_id`, probes `eth_sendRawTransactionSync` and
 Multicall3, registers every signer on the new chain and tops them up from the chain's treasury.
 
+The `geth` kind's defaults describe a local Anvil (confirmed on receipt, no provider billing, liveness judged
+by RPC answers). A real network of that kind needs the overrides in [Deriving the tunables](#deriving-the-tunables).
+
 Local drill (no code, proves the claim): add a second `[chains.*]` block pointing at another Anvil with a
 different `--chain-id`, then `cargo run -p gum-bench -- run mixed`.
 
@@ -47,6 +51,8 @@ different `--chain-id`, then `cargo run -p gum-bench -- run mixed`.
      insufficient funds, pool full, stateless rejects? Does the node reject up front, or accept and drop later?
    - What is a sane soft-confirmation signal and delay (block hash, tx membership, a `finalized` tag)?
    - Does the chain always produce blocks (`head_advance`) or only under load (`rpc_responsive`)?
+   - What does `eth_estimateGas` say when the sender cannot cover `value`? The worker funds the signer on
+     that answer (`estimate_lacks_funds`) and fails the job as a revert on any other.
 2. **Record fixtures** in `fixtures/<kind>/errors.json` and `receipts.json` — real payloads from the chain's
    testnet, not invented ones. Each error fixture states the class it must map to; each receipt fixture
    states what the sender was actually charged.
@@ -63,6 +69,25 @@ different `--chain-id`, then `cargo run -p gum-bench -- run mixed`.
    an engine configured for the testnet. Then compare `/v1/chains` → `rpc.by_method` with the provider's
    own usage report to validate `credits_per_call`.
 7. Mainnet: add the `[chains.*]` block, fund the treasury, deploy.
+
+## Deriving the tunables
+
+Every tunable is a chain fact or follows from one. Measure against the live chain, not just its docs: most of
+these take one `cast` call.
+
+| Fact about the chain | How to measure it | Tunables it sets |
+|---|---|---|
+| Block time | timestamps across 1,000 blocks | `block_time_ms`; `stuck_after_blocks` ≈ 5s of blocks; `stall_warn_ms` / `stall_outage_ms` |
+| Blocks when idle? | do empty blocks appear? | `liveness`: `head_advance` if yes, `rpc_responsive` if not |
+| Finality | does `finalized` equal `latest`? can it re-org? | `confirmation_delay_ms` = 0 when final on inclusion; otherwise the kind's `confirm_check` plus a delay |
+| Base fee level, floor, max change per block | `eth_feeHistory`, chain docs | `max_fee_cap_wei` (~50x the floor or the typical fee), `cancel_fee_cap_wei` (> 1.21x the cap), `fee_ttl_ms` (short enough that `max_fee_multiplier_bps` covers the worst-case rise) |
+| Is ordering by tip? Suggested tip | `eth_maxPriorityFeePerGas`, `feeHistory` rewards | `priority_fee_wei` |
+| Per-tx gas cap | send with `gas_limit` = cap + 1 | `max_tx_gas` |
+| `eth_sendRawTransactionSync` on the endpoint | the engine probes it at boot and alerts if missing | `sync_send_timeout_ms`; without it, `receipt_poll_interval_ms` ≈ block time |
+| Provider billing | the provider's price sheet, then its usage report | `credits_per_call` |
+| Native token's value | market price | `signer_min_balance`, `topup_amount`, `initial_topup_amount`, `treasury_min_balance`, `max_job_cost` (all in the native token's smallest unit) |
+
+Arc (`kinds/arc.rs`) is a worked example: each default there carries the fact it came from.
 
 ## What you should never need to touch
 

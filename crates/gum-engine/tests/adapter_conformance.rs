@@ -8,7 +8,8 @@
 //! - `actual_cost` reproduces what the chain charged, and `worst_case_cost` is never below it — the
 //!   ledger must reserve at least what a transaction can cost;
 //! - a replacement quote is one the chain's own pool rule accepts, and never exceeds the cap;
-//! - the stuck ladder only contains steps the chain can actually perform.
+//! - the stuck ladder only contains steps the chain can actually perform;
+//! - a failed gas estimate asks for funds only when funds are missing, never for a revert.
 
 use std::{path::PathBuf, str::FromStr};
 
@@ -107,6 +108,22 @@ fn anything_uncertain_is_indeterminate() {
         for err in uncertain {
             assert_eq!(adapter.classify_send_error(&err), SendErrorClass::Indeterminate, "kind `{kind}`: `{err}` must never be treated as a verdict");
         }
+    });
+}
+
+#[test]
+fn only_missing_funds_send_an_estimate_to_the_treasury() {
+    each_kind(|kind, adapter| {
+        let not_funds = [
+            RpcError::Transport("operation timed out".into()),
+            RpcError::Decode("unexpected end of input".into()),
+            RpcError::Response { code: 3, message: "execution reverted".into(), data: Some("0x08c379a0".into()) },
+        ];
+        for err in not_funds {
+            assert!(!adapter.estimate_lacks_funds(&err), "kind `{kind}`: `{err}` is not a funding problem; treating it as one would top up a signer for a call that reverts");
+        }
+        let geth_style = RpcError::Response { code: -32000, message: "insufficient funds for gas * price + value".into(), data: None };
+        assert!(adapter.estimate_lacks_funds(&geth_style), "kind `{kind}`: the geth-family wording must still be recognised");
     });
 }
 
