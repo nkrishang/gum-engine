@@ -69,6 +69,8 @@ treasury_min_balance = "100000000000000000"       # alert below 0.1 ETH
 
 # Arc (Circle). Uncomment once RPC_URL_ARC and GUM_CHAINS__ARC__TREASURY_KEY_ID are set in Railway and the
 # treasury holds USDC. It stays commented until then because a chain without its RPC URL is a boot error.
+# The treasury can be the same KMS key as on the other chains (same address, its own nonce and balance on Arc);
+# the job signers in GUM_SIGNERS__KMS_KEY_IDS join Arc automatically.
 # Gas is paid in USDC, which has 18 decimals natively (the ERC-20 view at 0x3600…0000 has 6): the amounts below
 # are 18-decimal units, so 1 USDC = 1000000000000000000. No public Arc endpoint offers
 # eth_sendRawTransactionSync, so the engine sends asynchronously and polls receipts (~3x the RPC calls).
