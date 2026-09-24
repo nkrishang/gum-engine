@@ -50,14 +50,14 @@
   {
     "code": -32000,
     "message": "Blocked address",
-    "class": "Deterministic",
-    "note": "Arc testnet, 2026-09-24: USDC blocklist; the sender always, the recipient when value > 0"
+    "class": "Indeterminate",
+    "note": "Arc testnet, 2026-09-24: USDC blocklist (sender always, recipient when value > 0). Checked at pool admission against mutable node state, so a reject does not prove an earlier submission of the same nonce was never accepted; Indeterminate keeps the nonce bound until a receipt or cancellation resolves it"
   },
   {
     "code": -32000,
     "message": "Address 0x70997970c51812dc3a010c7d01b50e0d17dc79c8 is denylisted",
-    "class": "Deterministic",
-    "note": "circlefin/arc-node v0.8.0 source: pool-admission denylist check (not yet observed live)"
+    "class": "Indeterminate",
+    "note": "circlefin/arc-node v0.8.0 source (not yet observed live). Stateful pool-admission check: a reject is not a verdict on the transaction, so the nonce stays bound"
   },
   {
     "code": -32000,

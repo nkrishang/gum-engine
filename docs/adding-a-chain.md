@@ -59,7 +59,8 @@ different `--chain-id`, then `cargo run -p gum-bench -- run mixed`.
 3. **Write `crates/gum-engine/src/chain/kinds/<kind>.rs`** implementing `ChainAdapter`. Adapters are pure
    functions (no I/O, no clocks). Reuse the helpers in `geth.rs` if the chain is geth-derived. Unknown
    error messages must fall through to `SendErrorClass::Indeterminate` — it is the only class that can
-   never free a nonce wrongly.
+   never free a nonce wrongly. The same holds for rejects that depend on mutable node state (compliance
+   lists, allowlists): only a reject the transaction's own bytes determine may be `Deterministic`.
 4. **Register it**: one line in `chain/registry.rs` (`adapter_for` and `known_kinds`), one in `kinds/mod.rs`.
 5. **Run the conformance suite**: `cargo test -p gum-engine --test adapter_conformance --test core_is_chain_agnostic`.
    It checks every fixture, that reserves always cover real costs, that your replacement quotes satisfy

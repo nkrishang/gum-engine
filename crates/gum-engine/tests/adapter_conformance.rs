@@ -118,6 +118,9 @@ fn only_missing_funds_send_an_estimate_to_the_treasury() {
             RpcError::Transport("operation timed out".into()),
             RpcError::Decode("unexpected end of input".into()),
             RpcError::Response { code: 3, message: "execution reverted".into(), data: Some("0x08c379a0".into()) },
+            // A contract may revert with any string, including one that sounds like a funding problem.
+            // Only the chain's own node-level wording may send the signer to the treasury.
+            RpcError::Response { code: 3, message: "execution reverted: OutOfFunds".into(), data: None },
         ];
         for err in not_funds {
             assert!(!adapter.estimate_lacks_funds(&err), "kind `{kind}`: `{err}` is not a funding problem; treating it as one would top up a signer for a call that reverts");

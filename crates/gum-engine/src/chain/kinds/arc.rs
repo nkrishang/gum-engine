@@ -90,10 +90,12 @@ impl ChainAdapter for ArcNetwork {
         if contains_any(&text, &["transaction in invalid tx list"]) {
             return SendErrorClass::FeeTooLow;
         }
-        // Compliance lists, checked at pool admission: the transaction never entered the pool. The job can
-        // never run as long as its sender, or a recipient of value, stays listed.
+        // Compliance lists, checked at pool admission against mutable node state. A rejection is not a
+        // verdict on the transaction: an earlier submission of the same nonce may already be in the pool
+        // (its response may simply have been lost). `Indeterminate` keeps the nonce bound until a receipt
+        // or a confirmed cancellation resolves it; only transaction-intrinsic rejects may free one.
         if contains_any(&text, &["blocked address", "is denylisted", "address is blocklisted"]) {
-            return SendErrorClass::Deterministic;
+            return SendErrorClass::Indeterminate;
         }
         // The RPC node could not forward the transaction to the network. The same bytes can go again later.
         if contains_any(&text, &["transaction relay upstreams are unreachable"]) {
@@ -103,9 +105,11 @@ impl ChainAdapter for ArcNetwork {
     }
 
     /// Since arc-node v0.8.0, a call whose `value` exceeds the sender's balance fails estimation with
-    /// `revert: OutOfFunds` instead of geth's `insufficient funds`.
+    /// `revert: OutOfFunds` instead of geth's `insufficient funds`. The `revert:` prefix matters: a
+    /// contract doing `revert("OutOfFunds")` surfaces as `execution reverted: OutOfFunds`, and that is a
+    /// real revert — matching the bare phrase would loop the job through top-ups it can never satisfy.
     fn estimate_lacks_funds(&self, err: &RpcError) -> bool {
-        message_of(err).is_some_and(|(_, text)| contains_any(&text, &["insufficient funds", "outoffunds"]))
+        message_of(err).is_some_and(|(_, text)| contains_any(&text, &["insufficient funds", "revert: outoffunds"]))
     }
 
     fn stuck_ladder(&self) -> &'static [StuckStep] {
@@ -145,5 +149,24 @@ mod tests {
         assert!(!ArcNetwork.estimate_lacks_funds(&response(3, "execution reverted: Zero address not allowed")));
         assert!(!ArcNetwork.estimate_lacks_funds(&response(-32603, "Blocked address")));
         assert!(!ArcNetwork.estimate_lacks_funds(&RpcError::Transport("connection reset by peer".into())));
+    }
+
+    /// A contract may revert with any string, including one that reads like a funding problem. Only the
+    /// node's own `revert: OutOfFunds` envelope means the sender is short; matching the bare phrase would
+    /// requeue a permanently reverting job with zero backoff, funding a signer it can never satisfy.
+    #[test]
+    fn contract_reverts_named_like_funding_problems_are_not_funding_problems() {
+        assert!(!ArcNetwork.estimate_lacks_funds(&response(3, "execution reverted: OutOfFunds")));
+        assert!(!ArcNetwork.estimate_lacks_funds(&response(3, "execution reverted: out of funds")));
+    }
+
+    /// Compliance rejects depend on mutable node state, so they are never a verdict on the transaction:
+    /// an earlier submission of the same nonce may already be live, and a freed nonce here could
+    /// double-send. `Indeterminate` keeps the nonce bound until a receipt or cancellation resolves it.
+    #[test]
+    fn compliance_rejects_do_not_free_the_nonce() {
+        for message in ["Blocked address", "Address 0x70997970c51812dc3a010c7d01b50e0d17dc79c8 is denylisted", "address is blocklisted"] {
+            assert_eq!(ArcNetwork.classify_send_error(&response(-32000, message)), SendErrorClass::Indeterminate, "`{message}` must not free the nonce");
+        }
     }
 }
